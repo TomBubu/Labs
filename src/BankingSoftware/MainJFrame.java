@@ -1965,7 +1965,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 // Lets use theCustomerObject. 
                 // We will need to save: number of accounts the customer has, the type of each of those accounts, the sortcode and account number, balance and 
                 
-                
+                //remove line from customer's file
+                bankBranches.removeLineFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt", "EmptyLine");
                 
             }
             else jStatusMessageLabel.setText("Please, search for and select a customer first.");
