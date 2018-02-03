@@ -57,7 +57,7 @@
 But every accountHolder object also has theAddressObject related to it and required by ClsCustomer constructor. 
 .....
 
-- **That leads to alternative:** those are already loaded by searching the customer. So foundCustomer is accountHolder and address object can be the associated object to the found customer.
+- **That leads to alternative:** those (customerObject and therefore its address) are already loaded by searching the customer. So foundCustomer is accountHolder and address object can be the associated object to the found customer.
 
 - Further on, the type will be the first attribute of the account details/array. It will be read as first, then all other attributes and then a new account of that particular type will be created from all the values.
 Then a new line will be read. That means 1 account will be on 1 line and a new account will be created with the type as specified by an admin in the GUI.
