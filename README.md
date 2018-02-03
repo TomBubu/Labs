@@ -11,3 +11,65 @@
 			- Log deposit and withdrawal transactions in the GUI
 			- Save these transactions to customer file
 			- Load these transactions from the customer file
+
+                        - Total count of transactions, deposit/withdrawn type of transaction, who?, bank name, account, balance... what else?
+                        - 2 versions of the tab:
+                            1. for user - see transactions for his/her accounts -> related to Accounts class
+                            2. for bank employees - see all accounts and their transactions
+                        - Ability to approve transactions for bank employees? How to implement this? Sockets?
+
+Immediate tasks checks:
+- Display account   []
+- Open new account  []
+- Show summary for selected account []
+
+#####################################################################################################
+Further tasks:
+
+4. Fix access to tabs depending on the use case diagram, fix login and register buttons accordingly
+
+5. Enhance transactions tab and implement full functionality
+
+6. Person class <=> customer class ?
+    - Customer is a person. Customer will inherit person's methods?
+
+7. Check default values for account, person and customer classes, fill them into the class diagram.
+
+8. All account classes will probably have an error where variable "days" is used. Fix as required.
+
+9. Implement Date variable in customer, person, transaction and account classes.
+
+10. After accounts and transactions are done, study factories and sockets.
+
+11. Use case descriptions for each use case in the use case diagram.
+
+12. Sequence diagrams for each use case in the use case diagram.
+
+#####################################################################################################
+
+Admins can create accounts for customer, save to file, calculate charges, deposit monthly and yearly interest onto accounts.
+
+XX. XML Implementation of the files // possibly left for the iteration 3:
+    - We will need to dynamically create XML files by XML "creator". We can use XML for iterations to sort out our headaches.
+    - How to: https://www.youtube.com/watch?v=H-aTpt4NG-s
+
+#####################################################################################################
+
+Possible error locations:
+Class   |   Line
+ClsCustomer |   229
+ClsAccount  |   81
+
+#####################################################################################################
+
+int k = number of accounts for a client. Then I will load the variable k, and I will read for i=1; i <= k; i++ of accounts with various variables for each account. 
+
+It will then have accountHolder object params: first name, surname, CustomerSince, and DOB parameters. 
+But every accountHolder object also has theAddressObject related to it and required by ClsCustomer constructor. 
+.....
+That leads to alternative: those are already loaded by searching the customer. So foundCustomer is accountHolder and address object can be the associated object to the found customer.**
+
+
+Further on, the type will be the first attribute of the account details/array. It will be read as first, then all other attributes and then a new account of that particular type will be created from all the values.
+Then a new line will be read. That means 1 account will be on 1 line and a new account will be created with the type as specified by an admin in the GUI.
+ 

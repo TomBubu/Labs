@@ -1897,7 +1897,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jOpenNewAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOpenNewAccountBtnActionPerformed
         String sortCode = jSortCodeTextField.getText();
         int accountNo = Integer.parseInt(jNumberTextField.getText());//here fix
-        Double balance = Double.parseDouble(jBalanceLabel.getText()); //should be derived uml /
+        //Double balance = Double.parseDouble(jBalanceLabel.getText()); //should be derived uml /
         String bankName = jBankNameTextField.getText();
         String accountType = jAccountTypeComboBox.getSelectedItem().toString();
         String conditions = jAccountConditionsTextArea.getText();
@@ -1906,8 +1906,16 @@ public class MainJFrame extends javax.swing.JFrame {
         // instantiated with the correct values. I can then pass it to the accounts as the associated customer 
         // with that particular account type.
         
-        if(!(sortCode == "" || accountNo == 0 || bankName == "" || accountType == "Please select" || conditions == "")){
-            if(!(theCustomer.getCustomerDetails()[0] == " ")){
+        System.out.println(bankName + "\n" + conditions);
+        
+        if (!(
+                (sortCode.equals(""))
+                || (accountNo == 0)
+                || (bankName.equals(""))
+                || (accountType.equals("Please select"))
+                || (conditions.equals(""))
+        )){
+            if(!(theCustomer.getCustomerDetails()[0].equals(" "))){
                 switch(accountType){
                     case "Current Account":  
                         // Parameters for Current account:
@@ -1952,6 +1960,13 @@ public class MainJFrame extends javax.swing.JFrame {
                     default:
                         jStatusMessageLabel.setText("Something went wrong, can't create an account.");
                 }
+                
+                // Now after a new account has been created for a particular customer, we need to save everything into his file. 
+                // Lets use theCustomerObject. 
+                // We will need to save: number of accounts the customer has, the type of each of those accounts, the sortcode and account number, balance and 
+                
+                
+                
             }
             else jStatusMessageLabel.setText("Please, search for and select a customer first.");
         }

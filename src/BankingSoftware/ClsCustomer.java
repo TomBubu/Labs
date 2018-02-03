@@ -48,8 +48,8 @@ public class ClsCustomer {
         Surname = " ";
         //DOB = new Date(01/01/1900);
         //DOB = new SimpleDateFormat("01/01/1900");
-        DOB = "01/01/1900";
         CustomerSince = "01/01/1900";
+        DOB = "01/01/1900";
         numberOfAccounts = 0;
     }
     
