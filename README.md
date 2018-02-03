@@ -12,9 +12,9 @@
 - Load these transactions from the customer file
 
 - Total count of transactions, deposit/withdrawn type of transaction, who?, bank name, account, balance... what else?
-- 2 versions of the tab:
-	1. for user - see transactions for his/her accounts -> related to Accounts class
-	2. for bank employees - see all accounts and their transactions
+- Two versions of the tab:
+	- For user - see transactions for his/her accounts -> related to Accounts class
+	- For bank employees - see all accounts and their transactions
 - Ability to approve transactions for bank employees? How to implement this? Sockets?
 
 **Immediate tasks check:**
@@ -28,13 +28,13 @@
 4. Fix access to tabs depending on the use case diagram, fix login and register buttons accordingly
 5. Enhance transactions tab and implement full functionality
 6. Person class <=> customer class ?
-- Customer is a person. Customer will inherit person's methods?
+	- Customer is a person. Customer will inherit person's methods?
 7. Check default values for account, person and customer classes, fill them into the class diagram.
 8. All account classes will probably have an error where variable "days" is used. Fix as required.
 9. Implement Date variable in customer, person, transaction and account classes.
 10. After accounts and transactions are done, study factories and sockets.
 11. Use case descriptions for each use case in the use case diagram.
-- Admins can create accounts for customer, save to file, calculate charges, deposit monthly and yearly interest onto accounts.
+	- Admins can create accounts for customer, save to file, calculate charges, deposit monthly and yearly interest onto accounts.
 12. Sequence diagrams for each use case in the use case diagram.
 
 99. XML Implementation of the files // possibly left for the iteration 3:
