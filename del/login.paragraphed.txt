@@ -1,0 +1,16 @@
+John
+pass
+Manager
+##
+Denise
+word
+Advisor
+##
+Michal
+1234
+Customer
+##
+Tom
+asd123
+Administrator
+##

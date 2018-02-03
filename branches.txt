@@ -1,0 +1,5 @@
+[BranchName1, omg2, 33, asd4, ASD5, omg6, omg7, omg8, omg9, omg10]
+[BranchName2, omg2, 33, asd2, ASD, omg3, omg4, omg5, omg6, omg7]
+[BranchName3, omg2, 33, asd2, ASD, omg3, omg4, omg5, omg6, omg7]
+[BranchName4, HouseName, 123, Street, Area, PosC, Town, Country, SorC, WorkHours]
+
