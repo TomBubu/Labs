@@ -6,6 +6,9 @@
 package BankingSoftware;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
@@ -45,13 +48,16 @@ public class ClsISAAccount extends ClsAccount{
         this.maxDepositPerYear = maxDepositPerYear;
         this.depositedThisYear = depositedThisYear;
     }    
-
-    /*
+    
+    @Override
     public void saveToFile(BufferedWriter bw){
-        
+        try {
+            bw.write(super.outputToFile() +", "+ this.maxDepositPerYear+", "+depositedThisYear);
+        } catch (IOException ex) {
+            Logger.getLogger(ClsISAAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    */ 
-
+    
     public void depositYearlyInterest(){
         long days = transactionDate.getTime() - openingDate.getTime();
         if(days >= 365) {

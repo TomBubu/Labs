@@ -132,7 +132,8 @@ public class ClsCustomerList {
                                 DetailsArray[i + 9],
                                 DetailsArray[i + 10],
                                 DetailsArray[i + 11].replace("]", "")
-                        )/*,
+                        )
+                        /*,
                         new ClsAccount(
                                 DetailsArray[i+12],
                                 Integer.parseInt(DetailsArray[i+13]),
@@ -149,20 +150,37 @@ public class ClsCustomerList {
         }
     }
     
-    public void findCustomer(JTextArea src, ClsCustomer aCustomer) {
+    public boolean findCustomer(JTextArea src, ClsCustomer aCustomer) {
         boolean found = false;
         for (ClsCustomer Client : theClients) {
             if (Client.isTheSame(aCustomer)) {
                 Client.displayCustomerDetails(src);
                 Client.getCustomerAddress().display(src, 0);
-                found = true;
+                return found = true;
             }
         }
         if (!found) {
-            src.setText("Customer not found.");
+            return found = false;
         }
+        // possible error
+        return found;
     }
     
+    // Code repetition below
+    /*
+    public ClsCustomer findCustomerinArray(String firstName, String surname, String DOB) {
+        ClsCustomer aCustomer = new ClsCustomer();
+        for (int i = 0; i < theClients.size(); i++) {
+            if (    theClients.get(i).getCustomerDetails()[0].equals(firstName)  &&
+                    theClients.get(i).getCustomerDetails()[1].equals(surname)    &&
+                    theClients.get(i).getCustomerDetails()[2].equals(DOB)
+            ){
+                aCustomer = theClients.get(i);
+            }
+        }
+        return aCustomer;
+    }
+    */
     // not needed now
     /*
     public void findCustomerAccount(JTextArea src, ClsCustomer aCustomer) {

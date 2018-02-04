@@ -21,9 +21,10 @@ public abstract class ClsAccount {
     protected double balance;
     protected String nameOfBank;
     protected double rate;
-    protected Date openingDate;
+    //protected Date openingDate;
     protected Date transactionDate;
-    protected /*derived uml /*/ int transactions;
+    protected Date openingDate;
+    protected int transactions;
     
     private boolean joint;
     private Date lastReportedDate;
@@ -36,7 +37,7 @@ public abstract class ClsAccount {
         transactionDate = new Date(01/01/1900);
     }
     
-    public ClsAccount(String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder){
+    public ClsAccount(String sortCode, int accountNo, double balance, String nameOfBank, double rate, /*Date openingDate,*/int transactions, ClsCustomer accountHolder){
         create(sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
     }
     
@@ -44,6 +45,7 @@ public abstract class ClsAccount {
     protected abstract boolean withdraw(double amount);
     protected abstract void calculateCharges();
     protected abstract void endOfMonthUtil(JTextArea src);
+    protected abstract void saveToFile(BufferedWriter bw);
     
     public void create(String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder){
         this.sortCode = sortCode;
@@ -55,17 +57,21 @@ public abstract class ClsAccount {
         this.accountHolder = accountHolder;
         //this.lastReportedDate = new Date(01/01/1900);
         //this.openingDate = new Date(01/01/1900);
+        //this.lastReportedDate = " ";
+        //this.openingDate = " ";
     }
     
     public void display(JTextArea src){
         src.append(
+                "Type: "                + this.type             + "\n"  +
                 "Sort Code: "           + this.sortCode         + "\n"  +
                 "Account Number: "      + this.accountNo        + "\n"  +
                 "Balance: "             + this.balance          + "\n"  +
                 "NameOfBank: "          + this.nameOfBank       + "\n"  +
                 "Rate: "                + this.rate             + "\n"  +
-                "Last reported Date:"   + this.lastReportedDate + "\n"  +        
-                "Opening Date: "        + this.openingDate      + "\n\n"  
+                "Client Name: "         + this.accountHolder.getCustomerDetails()[0] + " " + this.accountHolder.getCustomerDetails()[1]  + "\n" //+
+                //"Last reported Date:"   + this.lastReportedDate + "\n"  +        
+                //"Opening Date: "        + this.openingDate      + "\n\n"  
         );
     }
     
@@ -141,8 +147,8 @@ public abstract class ClsAccount {
     }
     
     // Method for testing line 177 in ClsCustomer
-    public String outputToFile(){
-        return (this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.lastReportedDate +", "+ this.openingDate);
+    protected String outputToFile(){
+        return (this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.transactions /* +", "+ this.openingDate + this.lastReportedDate */);
     }
 
 }

@@ -200,7 +200,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jClientTownLabel = new javax.swing.JLabel();
         jClientCountryTextField = new javax.swing.JTextField();
         jClientCountryLabel = new javax.swing.JLabel();
-        jDisplayCustomersAccountsBtn = new javax.swing.JButton();
+        jSummarySelectedAccBtn = new javax.swing.JButton();
         jSortCodeLabel = new javax.swing.JLabel();
         jSortCodeTextField = new javax.swing.JTextField();
         jAccountNumberLabel1 = new javax.swing.JLabel();
@@ -217,7 +217,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jSummarySelectedAccBtn = new javax.swing.JButton();
+        jDisplayCustomersAccountsBtn = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jAccountConditionsTextArea = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
@@ -376,7 +376,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(jLoginPanelLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jRegisterButton)))
-                .addContainerGap(296, Short.MAX_VALUE))
+                .addContainerGap(293, Short.MAX_VALUE))
         );
 
         jRoleComboBox.setSelectedIndex(0);
@@ -630,7 +630,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDisplayBranchDetailsButton))
                     .addComponent(jHeadOfficeAddressScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(275, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Head Office Address", jHeadOfficeAddressPanel);
@@ -990,7 +990,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jBranchesSaveToFileBtn)
                     .addComponent(jBranchesLoadFromFileBtn)
                     .addComponent(jRemoveSubdeptBtn))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Branches", jBranchesPanel);
@@ -1065,10 +1065,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jClientCountryLabel.setText("Country");
 
-        jDisplayCustomersAccountsBtn.setText("Display accounts for selected client");
-        jDisplayCustomersAccountsBtn.addActionListener(new java.awt.event.ActionListener() {
+        jSummarySelectedAccBtn.setText("Show summary for selected account");
+        jSummarySelectedAccBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDisplayCustomersAccountsBtnActionPerformed(evt);
+                jSummarySelectedAccBtnActionPerformed(evt);
             }
         });
 
@@ -1104,10 +1104,10 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Summary for selected account");
 
-        jSummarySelectedAccBtn.setText("Show summary for selected account");
-        jSummarySelectedAccBtn.addActionListener(new java.awt.event.ActionListener() {
+        jDisplayCustomersAccountsBtn.setText("Display all acounts for the client");
+        jDisplayCustomersAccountsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jSummarySelectedAccBtnActionPerformed(evt);
+                jDisplayCustomersAccountsBtnActionPerformed(evt);
             }
         });
 
@@ -1197,23 +1197,27 @@ public class MainJFrame extends javax.swing.JFrame {
                                 .addGap(329, 329, 329)
                                 .addComponent(jLabel5))))
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
-                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jClientsPanelLayout.createSequentialGroup()
+                                .addGap(284, 284, 284)
+                                .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
                                 .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jDisplayClientInformationBtn)
-                                    .addComponent(jRemoveClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jAddClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jExportClientstoFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jImportClientsfromFileBtn))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jOpenNewAccountBtn)
-                                    .addComponent(jSummarySelectedAccBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jDisplayCustomersAccountsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jAddClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
+                                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jOpenNewAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(jDisplayCustomersAccountsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jClientsPanelLayout.createSequentialGroup()
+                                .addComponent(jRemoveClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSummarySelectedAccBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(10, 10, 10)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
@@ -1303,37 +1307,36 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jDisplayClientInformationBtn)
-                            .addComponent(jDisplayCustomersAccountsBtn)
-                            .addComponent(jImportClientsfromFileBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 45, Short.MAX_VALUE))
+                            .addComponent(jImportClientsfromFileBtn)
+                            .addComponent(jDisplayCustomersAccountsBtn))
+                        .addGap(18, 18, 18)
+                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jExportClientstoFileBtn)
+                            .addComponent(jAddClientBtn)
+                            .addComponent(jOpenNewAccountBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jSummarySelectedAccBtn)
+                            .addComponent(jRemoveClientBtn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
-                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane7))
-                            .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(2, 2, 2)))
-                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jAccountTypeLabel)
-                    .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jAddClientBtn)
-                        .addComponent(jExportClientstoFileBtn)
-                        .addComponent(jOpenNewAccountBtn)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane7))
+                    .addGroup(jClientsPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(2, 2, 2)
+                .addComponent(jAccountTypeLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jSummarySelectedAccBtn)
-                    .addComponent(jRemoveClientBtn)
-                    .addComponent(jAccountTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45))
+                .addComponent(jAccountTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
         jMainTabbedPanel.addTab("Clients", jClientsPanel);
@@ -1462,7 +1465,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Transactions", jTransactionsPanel);
@@ -1480,8 +1483,7 @@ public class MainJFrame extends javax.swing.JFrame {
             jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jMainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jMainTabbedPanel)
-                .addContainerGap())
+                .addComponent(jMainTabbedPanel))
         );
 
         jMenuBarMain.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -1512,7 +1514,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jMainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jStatusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1641,7 +1643,6 @@ public class MainJFrame extends javax.swing.JFrame {
                 jStatusMessageLabel.setText("Logged in.");
                 
                 switch (jRoleComboBox.getSelectedItem().toString()) {
-                    
                     case "Administrator":
                         jMainTabbedPanel.addTab("Calculator", jTabInMemory_1);
                         jMainTabbedPanel.addTab("Head Office Address", jTabInMemory_2);
@@ -1673,7 +1674,6 @@ public class MainJFrame extends javax.swing.JFrame {
                         jMainTabbedPanel.addTab("Clients", jTabInMemory_5);
                         jMainTabbedPanel.addTab("Transactions", jTabInMemory_6);
                         jMainTabbedPanel.setSelectedIndex(1);
-                        
                         
                         
                         break;
@@ -1711,17 +1711,13 @@ public class MainJFrame extends javax.swing.JFrame {
                             
                             jMainTabbedPanel.setSelectedIndex(1);
                             
-                            //theCustomer.loadFromFile(1);
-                            
                         }
                         else jStatusMessageLabel.setText("Cannot login, please check login and password.");
                         break;    
-                }
+                } 
                 jStatusAnimationLabel.setText(jNameTextField.getText() + " " + jRoleComboBox.getSelectedItem().toString() + " is logged in.");
-            }
-            else jStatusMessageLabel.setText("Cannot login, the user cannot be found, please register.");
-        }
-        else jStatusMessageLabel.setText("Please input valid username, password and role.");    
+            } else jStatusMessageLabel.setText("Cannot login, the user cannot be found, please register.");
+        } else jStatusMessageLabel.setText("Please input valid username, password and role.");    
     }//GEN-LAST:event_jLoginButtonActionPerformed
     //done
     private void jRegisterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRegisterButtonActionPerformed
@@ -1899,22 +1895,17 @@ public class MainJFrame extends javax.swing.JFrame {
         jMainTabbedPanel.setSelectedIndex(0);
         
     }//GEN-LAST:event_jLogOutButtonActionPerformed
-    //finish 
+    //done 
     private void jOpenNewAccountBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOpenNewAccountBtnActionPerformed
         String sortCode = jSortCodeTextField.getText();
         int accountNo = Integer.parseInt(jNumberTextField.getText());//here fix
         String bankName = jBankNameTextField.getText();
         String accountType = jAccountTypeComboBox.getSelectedItem().toString();
         String conditions = jAccountConditionsTextArea.getText();
-        
         // Search for customer has to be done before creating account, so the theCustomer object is already
         // instantiated with the correct values. I can then pass it to the accounts as the associated customer 
         // with that particular account type.
-        
-        // Testing
-        //System.out.println(bankName + "\n" + conditions);
-        
-        if (!(
+      if (!(
                 (sortCode.equals(""))
                 || (accountNo == 0)
                 || (bankName.equals(""))
@@ -1931,40 +1922,38 @@ public class MainJFrame extends javax.swing.JFrame {
                 switch(accountType){
                     case "Current Account":  
                         // Parameters for Current account:
-                        //String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions,
-                        //String conditions, double availableBalance, double overdraftLimit, double fee
+                        // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions,
+                        // String conditions, double availableBalance, double overdraftLimit, double fee
                         currentAcc = new ClsCurrentAccount(
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             conditions, 0, 100.00, 25.00
                         );
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
+                        theCustomer.createAccountList();
                         theCustomer.createAccount(currentAcc, AccountListModel, accountType);
                         jStatusMessageLabel.setText("Account created.");
-                        
                         accountToBeSaved = currentAcc;
-                        
                         break;
 
                     case "ISA Account":
-                        //String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
-                        //double maxDepositPerYear, double depositedThisYear
+                        // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
+                        // double maxDepositPerYear, double depositedThisYear
                         ISAAcc = new ClsISAAccount(
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             3250, 0
                         );
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
+                        theCustomer.createAccountList();
                         theCustomer.createAccount(ISAAcc, AccountListModel, accountType);
                         jStatusMessageLabel.setText("Account created.");
-                        
                         accountToBeSaved = ISAAcc;
-                        
                         break;
 
                     case "Saving Account":
-                        //String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
-                        //double withdrawLimit
+                        // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
+                        // double withdrawLimit
                         savingsAcc = new ClsSavingsAccount(
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             200
@@ -1972,10 +1961,9 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         jStatusMessageLabel.setText("Account created.");
+                        theCustomer.createAccountList();
                         theCustomer.createAccount(savingsAcc, AccountListModel, accountType);
-                        
                         accountToBeSaved = savingsAcc;
-                        
                         break;
                         
                     default:
@@ -1987,12 +1975,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 // Now after a new account has been created for a particular customer, we need to save everything into his file. 
                 // Lets use theCustomerObject. 
                 // We will need to save: number of accounts the customer has, the type of each of those accounts, the sortcode and account number, balance and 
-                
-                // If there's no account created, don't update client's file.
+                // If there's no account created, don't update client's file:
                 if(accountToBeSaved != null){
                     bankBranches.removeLineFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt", "EmptyLine");
                     theCustomer.saveToClientFile(accountType, "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt", accountToBeSaved);
-                    // to be cont
+                    // probably done
                 }
                 else jStatusMessageLabel.setText("No account created.");
             }
@@ -2000,8 +1987,8 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         else jStatusMessageLabel.setText("Please, fill out all fields related to account creation.");
     }//GEN-LAST:event_jOpenNewAccountBtnActionPerformed
-    //fix impo
-    private void jDisplayCustomersAccountsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayCustomersAccountsBtnActionPerformed
+    //done
+    private void jSummarySelectedAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSummarySelectedAccBtnActionPerformed
         String firstName = jClientFirstNameTextField.getText();
         String lastName = jClientSurnameTextField.getText();
         String DOB = jClientDOBTextField.getText();
@@ -2025,15 +2012,16 @@ public class MainJFrame extends javax.swing.JFrame {
                 if (theCustomer.checkDOBFormat(DOB)) {
                         //polymorphism used below
                         jAccountsTextArea.setText("");
-                        //fix
+                        
+                    if (theCustomer.returnSpecificAcc(sortCode, accNo) != null) {
                         theCustomer.returnSpecificAcc(sortCode, accNo).display(jAccountsTextArea);
-
+                    } else jAccountsTextArea.setText("Account not found.");
                 } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
             } else jStatusMessageLabel.setText("The customer has no accounts associated.");
         } else jStatusMessageLabel.setText("Please, fill out all customer details and search for a customer first.");
         
-    }//GEN-LAST:event_jDisplayCustomersAccountsBtnActionPerformed
-    //done
+    }//GEN-LAST:event_jSummarySelectedAccBtnActionPerformed
+    //fix impo
     private void jSearchForClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchForClientBtnActionPerformed
         String firstName = jClientFirstNameTextField.getText();
         String lastName = jClientSurnameTextField.getText();
@@ -2056,12 +2044,15 @@ public class MainJFrame extends javax.swing.JFrame {
                 theAddress = new ClsIAddress(firstName, houseName, houseNo, street, area, postCode, town, country);
                 theCustomer = new ClsCustomer(firstName, lastName, DOB, customerSince, theAddress);//,thePersonAccount
                 jClientsTextArea.setText("");
-                bankClients.findCustomer(jClientsTextArea, theCustomer);
-
+                
+                if(bankClients.findCustomer(jClientsTextArea, theCustomer)){
+                    theCustomer.loadFromFile(theCustomer, 2);
+                } else jClientsTextArea.setText("Customer not found.");
+                
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
         } else jStatusMessageLabel.setText("Please, specify all customer details.");
     }//GEN-LAST:event_jSearchForClientBtnActionPerformed
-    //done
+    //fix new
     private void jImportClientsfromFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImportClientsfromFileBtnActionPerformed
         String role = theUser.getRole();
         try {
@@ -2072,7 +2063,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 bankClients.loadFromFile("Clients_" + jNameTextField.getText() + jPasswordField.getText() + ".txt", 0);
             }
             else{
-                jStatusAnimationLabel.setText("Can't load customers file/s.");
+                jStatusAnimationLabel.setText("Can't load customers' file.");
             }
         } catch (ParseException ex) {
             Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -2126,24 +2117,19 @@ public class MainJFrame extends javax.swing.JFrame {
         jClientsTextArea.setText(null);
         bankClients.display(jClientsTextArea);
     }//GEN-LAST:event_jDisplayClientInformationBtnActionPerformed
-    //new
-    private void jSummarySelectedAccBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSummarySelectedAccBtnActionPerformed
+    //fix new
+    private void jDisplayCustomersAccountsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayCustomersAccountsBtnActionPerformed
         String sortCode = jSortCodeTextField.getText();
         int accNo = Integer.parseInt(jNumberTextField.getText());
         
         if(theCustomer!=null){
         
-            if(!((sortCode.equals("")) && (accNo==0))){
-                //search for account object
-                
-            }
-            
         }
         else jStatusMessageLabel.setText("Please, find the client first.");
-    }//GEN-LAST:event_jSummarySelectedAccBtnActionPerformed
+    }//GEN-LAST:event_jDisplayCustomersAccountsBtnActionPerformed
     //new
     private void jGenerateStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGenerateStatementBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jGenerateStatementBtnActionPerformed
     //fix
     private void jDepositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDepositBtnActionPerformed

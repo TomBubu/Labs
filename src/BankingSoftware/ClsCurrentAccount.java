@@ -6,6 +6,9 @@
 package BankingSoftware;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -25,10 +28,10 @@ public class ClsCurrentAccount extends ClsAccount{
     }
        
     public ClsCurrentAccount(
-            String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
+            String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
             String conditions, double availableBalance, double overdraftLimit, double fee
     ){
-        super(bankCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
+        super(sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
         create(conditions, availableBalance, overdraftLimit, fee);
     }
     
@@ -51,11 +54,14 @@ public class ClsCurrentAccount extends ClsAccount{
     
     //task 1, step 5
 
-    /*
+    @Override
     public void saveToFile(BufferedWriter bw){
-        
+        try {
+            bw.write(super.outputToFile() +", "+ this.conditions+", "+this.availableBalance+", "+this.overdraftLimit+", "+this.fee);
+        } catch (IOException ex) {
+            Logger.getLogger(ClsISAAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    */
     
     public void depositMonthlyInterest(){
         // fix

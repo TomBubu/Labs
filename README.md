@@ -25,6 +25,10 @@
     - Once the same client is searched for, it is no longer possible to display the account and it seems it is not in the array ?
     - Once a new account is created for the same account (without searching for the same client meanwhile), the previous account disappears? from the array
     - **Fix: remove empty line from client file, save the array ownedAccounts to client file, load from client file depending on the client name and surnam.e**  
+- ClsCustomer:line 229, method loadFromFile(...){} needs to be called for client. Check comment on line 233.
+- Fix attributes in ClsAccount
+- Fix attributes to DATEs from STRINGs
+
 -----
 
 ### Further tasks:

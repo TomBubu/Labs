@@ -6,6 +6,9 @@
 package BankingSoftware;
 
 import java.io.BufferedWriter;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -46,19 +49,15 @@ public class ClsSavingsAccount extends ClsAccount{
     public void calculateCharges(){
         //fix
     }
-    /*
-        A withdrawal is not allowed during period of 90 days started from the opening account. Each
-    withdrawal during this period generates a £10.00 fee. Also, if at least one withdrawal occurred the interest rate
-    is reduced by 0.49%. There is no restrictions on how much money can be deposited. The fee for a month is
-    levied at the end of saving period (90 days) and counts as a transaction. The interest for a month is calculated
-    at the end of the saving period (90 days) and counts as a transaction.
-    */
     
-    /*
+    @Override
     public void saveToFile(BufferedWriter bw){
-        
+        try {
+            bw.write(super.outputToFile() +", "+ this.withdrawLimit);
+        } catch (IOException ex) {
+            Logger.getLogger(ClsISAAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    */
     
     @Override
     public boolean deposit(double amount){

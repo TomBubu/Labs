@@ -6,11 +6,13 @@
 package BankingSoftware;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextArea;
 
@@ -56,7 +58,7 @@ public class ClsCustomer {
     public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject){
         editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject);
     }
-    
+   
     /*
     public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject//, ClsAccount theAccountObject){
         editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject//, theAccountObject
@@ -155,8 +157,8 @@ public class ClsCustomer {
           this.Surname.equals(aCustomer.Surname) &&
           this.DOB.equals(aCustomer.DOB) &&
           this.CustomerSince.equals(aCustomer.CustomerSince) &&
-          this.homeAddress.isTheSame(aCustomer.getCustomerAddress()) //&&
-          //CustomerAccount.isTheSame(aCustomer.getCustomerAccount())
+          this.homeAddress.isTheSame(aCustomer.getCustomerAddress())
+          //&& CustomerAccount.isTheSame(aCustomer.getCustomerAccount())
           ){
             return true;
         }
@@ -166,22 +168,27 @@ public class ClsCustomer {
     }
     
     // #Methods for account opearations below# //
+    public void createAccountList(){
+        if(ownedAccounts == null){
+            ownedAccounts = new ArrayList<>();
+        }
+    }
+        
     public void createAccount(ClsAccount src, DefaultListModel srcModel, String type){
-        ownedAccounts = new ArrayList<>();
-        ownedAccounts.add(src);
-        srcModel.addElement("Type: " + type + src.outputDetails());
-        this.numberOfAccounts++;
+            ownedAccounts.add(src);
+            srcModel.addElement("Type: " + type + src.outputDetails());
+            this.numberOfAccounts++;
+    }
+    
+    public boolean checkSize(){
+        if(this.ownedAccounts != null){
+            return true;
+        }
+        else return false;
     }
   
     public ClsAccount returnSpecificAcc(String sortCode, int accountNo) {
-        
-        // Testing
-        System.out.println("Size: " + ownedAccounts.size());
-        for(int i=0; i < ownedAccounts.size(); i++){
-            System.out.println(ownedAccounts.get(i).outputDetails());
-        }
-       
-        for (int i = 0; i < ownedAccounts.size(); i++) {
+          for (int i = 0; i < ownedAccounts.size(); i++) {
             if ((ownedAccounts.get(i).sortCode.equals(sortCode)) && (ownedAccounts.get(i).accountNo == accountNo)) {
                 return ownedAccounts.get(i);
             }
@@ -189,26 +196,30 @@ public class ClsCustomer {
         return null;
     }
     
-    /*
-    public void create(ClsAccount anAccount){
-        this.CustomerAccount = anAccount;
-        anAccount.setCustomer(this);
-    }
-*/
-    
     public void saveToClientFile(String accountType, String filename, ClsAccount account){
         BufferedWriter customerWriter = null;
         int numOfAccounts = ownedAccounts.size();
         try{
-            //customerWriter = new BufferedWriter(new FileWriter("clients_"+ this.FirstName+this.Surname+"_File.txt", true));
             customerWriter = new BufferedWriter(new FileWriter(filename, true));
+            //customerWriter.write(numOfAccounts);                                // Param 1
+            //customerWriter.write(System.getProperty("line.separator"));
+            //customerWriter.write(accountType);                                  // Param 2
+            customerWriter.write(accountType/* + ", "*/);
+            customerWriter.write(System.getProperty("line.separator"));
+                //customerWriter.write(FirstName+", "+Surname+", "+DOB);     // Params 3, 4, 5  needed because in loading I need to find customer object by these and pass it to account constructor 
+                //customerWriter.write(System.getProperty("line.separator"));
             
-            customerWriter.write(numOfAccounts + ", ");                         // Param  1
-            customerWriter.write(FirstName+", "+Surname+", "+DOB + ", ");       // Params 2, 3, 4
-            for(int i = 0; i< numOfAccounts; i++){                              //
-                customerWriter.write(account.outputToFile());                   // Params 5,6,7,8,9,10,11 per 1 account
-            }
-            customerWriter.write("EmptyLine");                                  // Param 12 ; Not to be read but must be accounted for
+            if (account instanceof ClsCurrentAccount) {
+                account.saveToFile(customerWriter);                       // Params 6,7,8,9,10,11,12 per 1 account + 13,14,15,16
+            } else if (account instanceof ClsISAAccount) {
+                account.saveToFile(customerWriter);                       // Params 6,7,8,9,10,11,12 per 1 account + 13,14
+            } else if (account instanceof ClsSavingsAccount) {
+                account.saveToFile(customerWriter);                       // Params 6,7,8,9,10,11,12 per 1 account + 13
+            } 
+            customerWriter.write(System.getProperty("line.separator"));
+            customerWriter.write("EmptyLine");                                  // Param 13 ; Not to be read but must be accounted for
+            customerWriter.newLine();
+            System.gc();
             
             customerWriter.flush();
             customerWriter.close();
@@ -224,28 +235,105 @@ public class ClsCustomer {
         }
     }
     
-    public void loadFromFile(int param){
+    public void loadFromFile(ClsCustomer aCustomer, int param){
         //customer logged in
         if(param==1){
-            //("clients_"+ this.FirstName+this.Surname+"_File.txt");
+            // This method is automatically called from search from client, so when clients logs in, he/she does not
+            // have an access to this method. Therefore, this method also has to called from... login button perhaps?
         }
+
         //manager logged in
         else if(param==2){
-            /*for(){
-                probably bad idea.
-            }*/
+            //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
+            String filename = "Client_"+aCustomer.FirstName + aCustomer.Surname+".txt";
+            ArrayList<String> words = new ArrayList<>();
+            
+            try {
+                ownedAccounts.clear();
+                Scanner in = new Scanner(new File(filename));
+                
+                while(in.hasNextLine()) {
+                    String line = in.nextLine();
+                    for (String word : line.split(", ")) {
+                        words.add(word);
+                    }
+                }
+                String[] DetailsArray = words.toArray(new String[words.size()]);
+
+                    String accountType = in.nextLine();
+                    System.out.print(accountType);
+                    
+                    if(accountType.equals("Current Account")){
+                        for(int i = 0; i<=words.size()-10 ;i+=10){
+                            ClsCurrentAccount newAccount = new ClsCurrentAccount(
+                                DetailsArray[i],                            //sort code         1
+                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
+                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
+                                DetailsArray[i + 3],                        //nameOfBank        4
+                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
+                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
+                                aCustomer,                                  //ClsCustomer accountHolder     7
+                                DetailsArray[i + 6],                        //conditions        8
+                                Double.parseDouble(DetailsArray[i + 7]),    //availableBalance  9
+                                Double.parseDouble(DetailsArray[i + 8]),    //overdraftLimit    10
+                                Double.parseDouble(DetailsArray[i + 9])     //fee               11
+                            );
+                            ownedAccounts.add(newAccount);
+                        }
+                    }
+                    else if(accountType.equals("ISA Account")){
+                        for(int i = 0; i<=words.size()-8 ;i++){
+                            ClsISAAccount newAccount= new ClsISAAccount(
+                                DetailsArray[i],                            //sort code         1
+                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
+                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
+                                DetailsArray[i + 3],                        //nameOfBank        4
+                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
+                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
+                                aCustomer,                                  //ClsCustomer accountHolder     7
+                                Double.parseDouble(DetailsArray[i + 6]),    //maxDepositPerYear 8
+                                Double.parseDouble(DetailsArray[i + 7])     //depositedThisYear 9
+                                    
+                            );
+                            ownedAccounts.add(newAccount);
+                        }
+                    }
+                    else if(accountType.equals("Saving Account")){
+                        for(int i = 0; i<=words.size()-9 ;i+=9){
+                            ClsSavingsAccount newAccount = new ClsSavingsAccount(
+                                DetailsArray[i],                            //sort code         1
+                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
+                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
+                                DetailsArray[i + 3],                        //nameOfBank        4
+                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
+                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
+                                aCustomer,                                  //ClsCustomer accountHolder     7
+                                Double.parseDouble(DetailsArray[i + 6])     //withdrawLimit     8
+                            );
+                            ownedAccounts.add(newAccount);
+                        }
+                    }
+            } catch (IOException ioe1) {
+                System.out.println("IO Problem: " + ioe1);
+            }
+            
+            
+            
+            
+            
+            
+            
+            
         }
         else{
-            //to be coded
+            
         }
+        
+        /*
+            currentAcc = new ClsCurrentAccount( sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   conditions, 0, 100.00, 25.00);
+            ISAAcc = new ClsISAAccount(         sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   3250, 0);
+            savingsAcc = new ClsSavingsAccount( sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   200);
+        */
+        
     }
-   
-    // Probably should be done by nicer way
-    public boolean checkSize(){
-        if(this.ownedAccounts != null){
-            return true;
-        }
-        else return false;
-    }
-    
 }
