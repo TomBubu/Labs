@@ -43,7 +43,7 @@ public class ClsCustomer {
         //thePerson = new ClsPerson();
         homeAddress = new ClsIAddress();
         ownedAccounts = new ArrayList<>();
-        
+
         FirstName = " ";
         Surname = " ";
         //DOB = new Date(01/01/1900);
@@ -174,6 +174,13 @@ public class ClsCustomer {
     }
   
     public ClsAccount returnSpecificAcc(String sortCode, int accountNo) {
+        
+        // Testing
+        System.out.println("Size: " + ownedAccounts.size());
+        for(int i=0; i < ownedAccounts.size(); i++){
+            System.out.println(ownedAccounts.get(i).outputDetails());
+        }
+       
         for (int i = 0; i < ownedAccounts.size(); i++) {
             if ((ownedAccounts.get(i).sortCode.equals(sortCode)) && (ownedAccounts.get(i).accountNo == accountNo)) {
                 return ownedAccounts.get(i);
@@ -189,25 +196,19 @@ public class ClsCustomer {
     }
 */
     
-    public void saveToFile(String type){
+    public void saveToClientFile(String accountType, String filename, ClsAccount account){
         BufferedWriter customerWriter = null;
+        int numOfAccounts = ownedAccounts.size();
         try{
-            customerWriter = new BufferedWriter(new FileWriter("clients_"+ this.FirstName+this.Surname+"_File.txt", true));
-            customerWriter.write("["+FirstName+", "+Surname+", "+DOB+", "+type);
-            //.get(0) ??? possible errors:
-            //ownedAccounts.get(0).saveToFile(customerWriter);
+            //customerWriter = new BufferedWriter(new FileWriter("clients_"+ this.FirstName+this.Surname+"_File.txt", true));
+            customerWriter = new BufferedWriter(new FileWriter(filename, true));
             
-            /*
-            for(ClsAccount Account : ownedAccounts){
-                customerWriter.write(this.currentAccount., 0, 0);
-            }*/
-            
-            /*
-            for ownedAccounts.
-            currentAccount.saveToFile(customerWriter);
-            isaAccount.saveToFile(customerWriter);
-            savingAccount.saveToFile(customerWriter);
-            */
+            customerWriter.write(numOfAccounts + ", ");                         // Param  1
+            customerWriter.write(FirstName+", "+Surname+", "+DOB + ", ");       // Params 2, 3, 4
+            for(int i = 0; i< numOfAccounts; i++){                              //
+                customerWriter.write(account.outputToFile());                   // Params 5,6,7,8,9,10,11 per 1 account
+            }
+            customerWriter.write("EmptyLine");                                  // Param 12 ; Not to be read but must be accounted for
             
             customerWriter.flush();
             customerWriter.close();
@@ -241,7 +242,7 @@ public class ClsCustomer {
    
     // Probably should be done by nicer way
     public boolean checkSize(){
-        if(this.ownedAccounts == null){
+        if(this.ownedAccounts != null){
             return true;
         }
         else return false;

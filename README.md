@@ -21,7 +21,10 @@
 - Display account   []
 - Open new account  []
 - Show summary for selected account []
-
+- Bug: Search for client works. Client object is selected. Account is added. Now it is possible to display account details.
+    - Once the same client is searched for, it is no longer possible to display the account and it seems it is not in the array ?
+    - Once a new account is created for the same account (without searching for the same client meanwhile), the previous account disappears? from the array
+    - **Fix: remove empty line from client file, save the array ownedAccounts to client file, load from client file depending on the client name and surnam.e**  
 -----
 
 ### Further tasks:
@@ -47,6 +50,7 @@
 - Class   |   Line
 - ClsCustomer |   229
 - ClsAccount  |   81
+- MainJFrame    |   2084
 
 -----
 
@@ -67,3 +71,53 @@ Then a new line will be read. That means 1 account will be on 1 line and a new a
 -----
 **Markdown cheatsheet:**
 https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#h3
+
+-----
+### Use case diagram summary:
+
+**Bank advisor:**
+- Login
+- Display Head office details
+- Display all clients information
+- Display all client accounts details
+- Search for client
+- Display particular client's information
+- Display particular client's account details
+- Load branches from file
+- Display subdepartments
+
+**Bank manager:**
+- All use cases
+
+**Bank administrator:**
+- Login
+- Register
+- Display Head office details
+- Display person details
+- Display person address
+- Edit client information
+- Load clients from file
+- Display all clients information
+- Display all client accounts details
+- Search for client
+- Display particular client's information
+- Display particular client's account details
+- Load branches from file
+- Display subdepartments
+- Show account summary
+- Display transactions
+- Generate statement
+- Deposit
+- Withdraw
+
+**Bank client:**
+- Login
+- Display Head office details
+- Display Head office address
+- Display person details
+- Display person address
+- Display particular client's information
+- Display particular client's account details
+- Show account summary
+- Display transactions
+- View statement

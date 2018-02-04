@@ -122,7 +122,7 @@ public abstract class ClsAccount {
     }
     
     public String outputDetails(){
-        return ("Account number: " + this.accountNo);
+        return ("Sort code: " + this.sortCode + "\n" + "Account number: " + this.accountNo);
     }
     
     /*
@@ -140,8 +140,9 @@ public abstract class ClsAccount {
         transactions = 0;
     }
     
-    public void saveToFile(){
-        
+    // Method for testing line 177 in ClsCustomer
+    public String outputToFile(){
+        return (this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.lastReportedDate +", "+ this.openingDate);
     }
 
 }

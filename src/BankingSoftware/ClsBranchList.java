@@ -144,7 +144,7 @@ public class ClsBranchList {
         return theBranch;
     }
     
-    public void removeLineFromFile(String filename, String lineToRemove/*new stuff: ,ClsBranch aSubBranch */ ) {
+    public void removeLineFromFile(String filename, String lineToRemove) {
         BufferedReader br;
         PrintWriter pw = null;
         try {
@@ -195,7 +195,7 @@ public class ClsBranchList {
         }
     }
     
-    public void saveToSubdepartmentsFile(/*BW is new   BufferedWriter writer,*/ String filename, ClsBranch aSubBranch) {    
+    public void saveToSubdepartmentsFile(String filename, ClsBranch aSubBranch) {    
         BufferedWriter writer = null;
         try {
             writer = new BufferedWriter(new FileWriter(filename, true));
