@@ -22,14 +22,14 @@ public class ClsISAAccount extends ClsAccount{
     
     public ClsISAAccount(){
         super();
-        create(3250, 0);
+        create(3250.0, 0.0);
     }
     
-    public ClsISAAccount(
-            String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
+    public ClsISAAccount( String type,
+            String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
             double maxDepositPerYear, double depositedThisYear
     ){
-        super(bankCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
+        super(type, sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
         create(maxDepositPerYear, depositedThisYear);
     }
     

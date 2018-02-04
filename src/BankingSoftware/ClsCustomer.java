@@ -33,7 +33,6 @@ public class ClsCustomer {
     //private Date DOB;
     private String CustomerSince;
     private String DOB;
-    private int numberOfAccounts; // can use size of ownedAccounts
     
     /* Conversion of Date DOB to String DOBString
     Format formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -52,7 +51,6 @@ public class ClsCustomer {
         //DOB = new SimpleDateFormat("01/01/1900");
         CustomerSince = "01/01/1900";
         DOB = "01/01/1900";
-        numberOfAccounts = 0;
     }
     
     public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject){
@@ -93,11 +91,9 @@ public class ClsCustomer {
         this.Surname = surname;
         this.DOB = strDOB;
         this.CustomerSince = customerSince;
-        
         this.homeAddress = addressObject;
         //this.CustomerAccount = theAccountObject;
         //this.ownedAccounts = theAccountObject;
-
     }
     
     /*
@@ -174,10 +170,9 @@ public class ClsCustomer {
         }
     }
         
-    public void createAccount(ClsAccount src, DefaultListModel srcModel, String type){
+    public void createAccount(ClsAccount src, DefaultListModel srcModel){
             ownedAccounts.add(src);
-            srcModel.addElement("Type: " + type + src.outputDetails());
-            this.numberOfAccounts++;
+            srcModel.addElement("Type: " + src.type + src.outputDetails());
     }
     
     public boolean checkSize(){
@@ -196,21 +191,21 @@ public class ClsCustomer {
         return null;
     }
     
-    public void saveToClientFile(String accountType, String filename, ClsAccount account){
+    public void saveToClientFile(String filename, ClsAccount account){
         BufferedWriter customerWriter = null;
-        int numOfAccounts = ownedAccounts.size();
+        //int numOfAccounts = ownedAccounts.size();
         try{
             customerWriter = new BufferedWriter(new FileWriter(filename, true));
             //customerWriter.write(numOfAccounts);                                // Param 1
             //customerWriter.write(System.getProperty("line.separator"));
             //customerWriter.write(accountType);                                  // Param 2
-            customerWriter.write(accountType/* + ", "*/);
-            customerWriter.write(System.getProperty("line.separator"));
+            //customerWriter.write(accountType/* + ", "*/);
+            //customerWriter.write(System.getProperty("line.separator"));
                 //customerWriter.write(FirstName+", "+Surname+", "+DOB);     // Params 3, 4, 5  needed because in loading I need to find customer object by these and pass it to account constructor 
                 //customerWriter.write(System.getProperty("line.separator"));
             
             if (account instanceof ClsCurrentAccount) {
-                account.saveToFile(customerWriter);                       // Params 6,7,8,9,10,11,12 per 1 account + 13,14,15,16
+                account.saveToFile(customerWriter);                       // Params 5,6,7,8,9,10,11,12 per 1 account + 13,14,15,16
             } else if (account instanceof ClsISAAccount) {
                 account.saveToFile(customerWriter);                       // Params 6,7,8,9,10,11,12 per 1 account + 13,14
             } else if (account instanceof ClsSavingsAccount) {
@@ -235,105 +230,108 @@ public class ClsCustomer {
         }
     }
     
-    public void loadFromFile(ClsCustomer aCustomer, int param){
-        //customer logged in
-        if(param==1){
-            // This method is automatically called from search from client, so when clients logs in, he/she does not
-            // have an access to this method. Therefore, this method also has to called from... login button perhaps?
-        }
-
-        //manager logged in
-        else if(param==2){
-            //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
-            String filename = "Client_"+aCustomer.FirstName + aCustomer.Surname+".txt";
-            ArrayList<String> words = new ArrayList<>();
-            
-            try {
-                ownedAccounts.clear();
-                Scanner in = new Scanner(new File(filename));
-                
-                while(in.hasNextLine()) {
-                    String line = in.nextLine();
-                    for (String word : line.split(", ")) {
-                        words.add(word);
-                    }
+    /*Code repetition below*/
+    public void loadCAsFromFile(String filename, ClsCustomer aCustomer) {
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            Scanner in = new Scanner(new File(filename));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                for (String word : line.split(", ")) {
+                    words.add(word);
                 }
-                String[] DetailsArray = words.toArray(new String[words.size()]);
-
-                    String accountType = in.nextLine();
-                    System.out.print(accountType);
-                    
-                    if(accountType.equals("Current Account")){
-                        for(int i = 0; i<=words.size()-10 ;i+=10){
-                            ClsCurrentAccount newAccount = new ClsCurrentAccount(
-                                DetailsArray[i],                            //sort code         1
-                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
-                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
-                                DetailsArray[i + 3],                        //nameOfBank        4
-                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
-                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
-                                aCustomer,                                  //ClsCustomer accountHolder     7
-                                DetailsArray[i + 6],                        //conditions        8
-                                Double.parseDouble(DetailsArray[i + 7]),    //availableBalance  9
-                                Double.parseDouble(DetailsArray[i + 8]),    //overdraftLimit    10
-                                Double.parseDouble(DetailsArray[i + 9])     //fee               11
-                            );
-                            ownedAccounts.add(newAccount);
-                        }
-                    }
-                    else if(accountType.equals("ISA Account")){
-                        for(int i = 0; i<=words.size()-8 ;i++){
-                            ClsISAAccount newAccount= new ClsISAAccount(
-                                DetailsArray[i],                            //sort code         1
-                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
-                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
-                                DetailsArray[i + 3],                        //nameOfBank        4
-                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
-                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
-                                aCustomer,                                  //ClsCustomer accountHolder     7
-                                Double.parseDouble(DetailsArray[i + 6]),    //maxDepositPerYear 8
-                                Double.parseDouble(DetailsArray[i + 7])     //depositedThisYear 9
-                                    
-                            );
-                            ownedAccounts.add(newAccount);
-                        }
-                    }
-                    else if(accountType.equals("Saving Account")){
-                        for(int i = 0; i<=words.size()-9 ;i+=9){
-                            ClsSavingsAccount newAccount = new ClsSavingsAccount(
-                                DetailsArray[i],                            //sort code         1
-                                Integer.parseInt(DetailsArray[i + 1]),      //accountNo         2
-                                Double.parseDouble(DetailsArray[i + 2]),    //balance           3
-                                DetailsArray[i + 3],                        //nameOfBank        4
-                                Double.parseDouble(DetailsArray[i + 4]),    //rate              5
-                                Integer.parseInt(DetailsArray[i + 5]),      //transactions      6   
-                                aCustomer,                                  //ClsCustomer accountHolder     7
-                                Double.parseDouble(DetailsArray[i + 6])     //withdrawLimit     8
-                            );
-                            ownedAccounts.add(newAccount);
-                        }
-                    }
-            } catch (IOException ioe1) {
-                System.out.println("IO Problem: " + ioe1);
+            }
+            String[] DetailsArray = words.toArray(new String[words.size()]);
+            
+            if(ownedAccounts!=null){
+                ownedAccounts.clear();
             }
             
-            
-            
-            
-            
-            
-            
-            
+            for (int i = 0; i < words.size() - 11; i += 11) {
+                ClsCurrentAccount newAccount = new ClsCurrentAccount(
+                        DetailsArray[i],
+                        DetailsArray[i+1], //sort code         2
+                        Integer.parseInt(DetailsArray[i + 2]), //accountNo         3
+                        Double.parseDouble(DetailsArray[i +3]), //balance           4
+                        DetailsArray[i + 4], //nameOfBank        5
+                        Double.parseDouble(DetailsArray[i + 5]), //rate              6
+                        Integer.parseInt(DetailsArray[i + 6]), //transactions      7 
+                        aCustomer, //ClsCustomer accountHolder     8
+                        DetailsArray[i + 7], //conditions        9
+                        Double.parseDouble(DetailsArray[i + 8]), //availableBalance  10
+                        Double.parseDouble(DetailsArray[i + 9]), //overdraftLimit    11
+                        Double.parseDouble(DetailsArray[i + 10]) //fee               12
+                );
+                ownedAccounts.add(newAccount);
+            }
+        } catch (IOException ioe1) {
+            System.out.println("IO Problem: " + ioe1);
         }
-        else{
-            
+    }
+    
+    public void loadISAsFromFile(String filename, ClsCustomer aCustomer) {
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            Scanner in = new Scanner(new File(filename));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                for (String word : line.split(", ")) {
+                    words.add(word);
+                }
+            }
+            String[] DetailsArray = words.toArray(new String[words.size()]);
+            //ownedAccounts.clear();
+            for (int i = 0; i <= words.size() - 9; i+=9) {// or 8?
+                ClsISAAccount newAccount = new ClsISAAccount(
+                        DetailsArray[i],    // type 1
+                        DetailsArray[i+1], //sort code         2
+                        Integer.parseInt(DetailsArray[i + 2]), //accountNo         3
+                        Double.parseDouble(DetailsArray[i + 3]), //balance          4
+                        DetailsArray[i + 4], //nameOfBank        5
+                        Double.parseDouble(DetailsArray[i + 5]), //rate              6
+                        Integer.parseInt(DetailsArray[i + 6]), //transactions      7  
+                        aCustomer, //ClsCustomer accountHolder     8
+                        Double.parseDouble(DetailsArray[i + 7]), //maxDepositPerYear 9
+                        Double.parseDouble(DetailsArray[i + 8]) //depositedThisYear 10
+                        
+                );
+                ownedAccounts.add(newAccount);
+            }
+        } catch (IOException ioe1) {
+            System.out.println("IO Problem: " + ioe1);
         }
-        
-        /*
-            currentAcc = new ClsCurrentAccount( sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   conditions, 0, 100.00, 25.00);
-            ISAAcc = new ClsISAAccount(         sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   3250, 0);
-            savingsAcc = new ClsSavingsAccount( sortCode, accountNo, 0, bankName, 1.2, 0,    theCustomer,   200);
-        */
-        
+    }
+
+    public void loadSAsFromFile(String filename, ClsCustomer aCustomer) {
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            Scanner in = new Scanner(new File(filename));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                for (String word : line.split(", ")) {
+                    words.add(word);
+                }
+            }
+            String[] DetailsArray = words.toArray(new String[words.size()]);
+            //ownedAccounts.clear();
+            for (int i = 0; i <= words.size() - 8; i += 8) {
+                ClsSavingsAccount newAccount = new ClsSavingsAccount(
+                        DetailsArray[i], //type 1
+                        DetailsArray[i+1], //sort code         2
+                        Integer.parseInt(DetailsArray[i + 2]), //accountNo         3
+                        Double.parseDouble(DetailsArray[i + 3]), //balance           4
+                        DetailsArray[i + 4], //nameOfBank        5
+                        Double.parseDouble(DetailsArray[i + 5]), //rate              6
+                        Integer.parseInt(DetailsArray[i + 6]), //transactions      7 
+                        aCustomer, //ClsCustomer accountHolder     8
+                        Double.parseDouble(DetailsArray[i + 7]) //withdrawLimit     9
+                );
+                ownedAccounts.add(newAccount);
+                //Testing
+                System.out.println(ownedAccounts.size());
+            }
+        } catch (IOException ioe1) {
+            System.out.println("IO Problem: " + ioe1);
+        }
     }
 }

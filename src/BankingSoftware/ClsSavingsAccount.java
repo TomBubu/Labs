@@ -24,11 +24,11 @@ public class ClsSavingsAccount extends ClsAccount{
     }
     
     
-    public ClsSavingsAccount(
+    public ClsSavingsAccount(String type,
         String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
         double withdrawLimit
     ){
-        super(bankCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
+        super(type, bankCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
         create(withdrawLimit);
     }
     

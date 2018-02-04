@@ -1924,37 +1924,41 @@ public class MainJFrame extends javax.swing.JFrame {
                         // Parameters for Current account:
                         // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions,
                         // String conditions, double availableBalance, double overdraftLimit, double fee
-                        currentAcc = new ClsCurrentAccount(
+                        currentAcc = new ClsCurrentAccount(accountType,
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             conditions, 0, 100.00, 25.00
                         );
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(currentAcc, AccountListModel, accountType);
+                        theCustomer.createAccount(currentAcc, AccountListModel);
                         jStatusMessageLabel.setText("Account created.");
-                        accountToBeSaved = currentAcc;
+                        //accountToBeSaved = currentAcc;
+                        bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", "EmptyLine");
+                        theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", currentAcc);
                         break;
 
                     case "ISA Account":
                         // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
                         // double maxDepositPerYear, double depositedThisYear
-                        ISAAcc = new ClsISAAccount(
+                        ISAAcc = new ClsISAAccount(accountType,
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             3250, 0
                         );
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(ISAAcc, AccountListModel, accountType);
+                        theCustomer.createAccount(ISAAcc, AccountListModel);
                         jStatusMessageLabel.setText("Account created.");
-                        accountToBeSaved = ISAAcc;
+                        //accountToBeSaved = ISAAcc;
+                        bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", "EmptyLine");
+                        theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", ISAAcc);
                         break;
 
                     case "Saving Account":
                         // String bankCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
                         // double withdrawLimit
-                        savingsAcc = new ClsSavingsAccount(
+                        savingsAcc = new ClsSavingsAccount( accountType,
                             sortCode, accountNo, 0, bankName, 1.2, 0, theCustomer,
                             200
                         );
@@ -1962,26 +1966,16 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println(theCustomer.outputCustomerDetails());
                         jStatusMessageLabel.setText("Account created.");
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(savingsAcc, AccountListModel, accountType);
-                        accountToBeSaved = savingsAcc;
+                        theCustomer.createAccount(savingsAcc, AccountListModel);
+                        //accountToBeSaved = savingsAcc;
+                        bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", "EmptyLine");
+                        theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", savingsAcc);
                         break;
                         
                     default:
                         jStatusMessageLabel.setText("Something went wrong, can't create an account.");
                         accountToBeSaved = null;
                 }
-                
-                
-                // Now after a new account has been created for a particular customer, we need to save everything into his file. 
-                // Lets use theCustomerObject. 
-                // We will need to save: number of accounts the customer has, the type of each of those accounts, the sortcode and account number, balance and 
-                // If there's no account created, don't update client's file:
-                if(accountToBeSaved != null){
-                    bankBranches.removeLineFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt", "EmptyLine");
-                    theCustomer.saveToClientFile(accountType, "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt", accountToBeSaved);
-                    // probably done
-                }
-                else jStatusMessageLabel.setText("No account created.");
             }
             else jStatusMessageLabel.setText("Please, search for and select a customer first.");
         }
@@ -2046,7 +2040,17 @@ public class MainJFrame extends javax.swing.JFrame {
                 jClientsTextArea.setText("");
                 
                 if(bankClients.findCustomer(jClientsTextArea, theCustomer)){
-                    theCustomer.loadFromFile(theCustomer, 2);
+                    theCustomer.createAccountList();
+                    //theCustomer.loadFromFile(theCustomer, 2);
+                    //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
+                    //client_FNSUR_CAs.txt
+                    //client_FNSUR_ISAs.txt
+                    //client_FNSUR_SAs.txt
+                    theCustomer.loadCAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", theCustomer);
+                    theCustomer.loadISAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", theCustomer);
+                    theCustomer.loadSAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", theCustomer);
+                    
+                    
                 } else jClientsTextArea.setText("Customer not found.");
                 
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");

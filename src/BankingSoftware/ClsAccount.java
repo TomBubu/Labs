@@ -33,12 +33,12 @@ public abstract class ClsAccount {
     protected ClsCurrentAccount coHolder;
     
     public ClsAccount() {
-        create(" ", 0, 0.0d, " ", 1.20, 0, accountHolder);
+        create(" ", " ", 0, 0.0d, " ", 1.20, 0, accountHolder);
         transactionDate = new Date(01/01/1900);
     }
     
-    public ClsAccount(String sortCode, int accountNo, double balance, String nameOfBank, double rate, /*Date openingDate,*/int transactions, ClsCustomer accountHolder){
-        create(sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
+    public ClsAccount(String type, String sortCode, int accountNo, double balance, String nameOfBank, double rate, /*Date openingDate,*/int transactions, ClsCustomer accountHolder){
+        create(type, sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
     }
     
     protected abstract boolean deposit(double amount);
@@ -47,7 +47,8 @@ public abstract class ClsAccount {
     protected abstract void endOfMonthUtil(JTextArea src);
     protected abstract void saveToFile(BufferedWriter bw);
     
-    public void create(String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder){
+    public void create(String type, String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder){
+        this.type = type;
         this.sortCode = sortCode;
         this.accountNo = accountNo;
         this.balance = balance;
@@ -148,7 +149,7 @@ public abstract class ClsAccount {
     
     // Method for testing line 177 in ClsCustomer
     protected String outputToFile(){
-        return (this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.transactions /* +", "+ this.openingDate + this.lastReportedDate */);
+        return (this.type+ ", "+this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.transactions /* +", "+ this.openingDate + this.lastReportedDate */);
     }
 
 }

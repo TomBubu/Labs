@@ -27,11 +27,11 @@ public class ClsCurrentAccount extends ClsAccount{
         create(" ", 0.00, 100.00, 25.00);
     }
        
-    public ClsCurrentAccount(
+    public ClsCurrentAccount( String type,
             String sortCode, int accountNo, double balance, String nameOfBank, double rate, int transactions, ClsCustomer accountHolder,
             String conditions, double availableBalance, double overdraftLimit, double fee
     ){
-        super(sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
+        super(type, sortCode, accountNo, balance, nameOfBank, rate, transactions, accountHolder);
         create(conditions, availableBalance, overdraftLimit, fee);
     }
     
