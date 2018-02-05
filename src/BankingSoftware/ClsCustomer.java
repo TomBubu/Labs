@@ -170,9 +170,16 @@ public class ClsCustomer {
         }
     }
         
-    public void createAccount(ClsAccount src, DefaultListModel srcModel){
+    public void createAccount(ClsAccount src/*, DefaultListModel srcModel*/){
             ownedAccounts.add(src);
-            srcModel.addElement("Type: " + src.type + src.outputDetails());
+            //srcModel.addElement("Type: " + src.type + src.outputDetails());
+    }
+    
+    public void populateJListFromArrayList(DefaultListModel srcModel) {
+        srcModel.clear();
+        for (ClsAccount account : ownedAccounts) {
+            srcModel.addElement("Type: " + account.type + account.outputDetails());
+        }
     }
     
     public boolean checkSize(){
