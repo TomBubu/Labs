@@ -217,7 +217,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jDisplayCustomersAccountsBtn = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         jAccountConditionsTextArea = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
@@ -1104,13 +1103,6 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel3.setText("Summary for selected account");
 
-        jDisplayCustomersAccountsBtn.setText("Display all acounts for the client");
-        jDisplayCustomersAccountsBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jDisplayCustomersAccountsBtnActionPerformed(evt);
-            }
-        });
-
         jAccountConditionsTextArea.setColumns(20);
         jAccountConditionsTextArea.setLineWrap(true);
         jAccountConditionsTextArea.setRows(5);
@@ -1210,9 +1202,7 @@ public class MainJFrame extends javax.swing.JFrame {
                                     .addComponent(jExportClientstoFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jImportClientsfromFileBtn))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jOpenNewAccountBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                    .addComponent(jDisplayCustomersAccountsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jOpenNewAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jClientsPanelLayout.createSequentialGroup()
                                 .addComponent(jRemoveClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1307,18 +1297,16 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jDisplayClientInformationBtn)
-                            .addComponent(jImportClientsfromFileBtn)
-                            .addComponent(jDisplayCustomersAccountsBtn))
+                            .addComponent(jImportClientsfromFileBtn))
                         .addGap(18, 18, 18)
-                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jExportClientstoFileBtn)
                             .addComponent(jAddClientBtn)
                             .addComponent(jOpenNewAccountBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jSummarySelectedAccBtn)
-                            .addComponent(jRemoveClientBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jRemoveClientBtn)))
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1921,7 +1909,10 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(currentAcc, AccountListModel);
+                        theCustomer.createAccount(currentAcc/*, AccountListModel*/);
+                        //maybe
+                        theCustomer.populateJListFromArrayList(AccountListModel);
+                        
                         jStatusMessageLabel.setText("Account created.");
                         //accountToBeSaved = currentAcc;
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", "EmptyLine");
@@ -1933,7 +1924,9 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(ISAAcc, AccountListModel);
+                        theCustomer.createAccount(ISAAcc/*, AccountListModel*/);
+                        theCustomer.populateJListFromArrayList(AccountListModel);
+                        
                         jStatusMessageLabel.setText("Account created.");
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", ISAAcc);
@@ -1945,7 +1938,9 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println(theCustomer.outputCustomerDetails());
                         jStatusMessageLabel.setText("Account created.");
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(savingsAcc, AccountListModel);
+                        theCustomer.createAccount(savingsAcc/*, AccountListModel*/);
+                        theCustomer.populateJListFromArrayList(AccountListModel);
+                        
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", savingsAcc);
                         break;
@@ -2017,8 +2012,17 @@ public class MainJFrame extends javax.swing.JFrame {
                     //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
                     //client_FNSUR_CAs.txt, client_FNSUR_ISAs.txt, client_FNSUR_SAs.txt
                     theCustomer.loadCAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", theCustomer);
+                    
+                    AccountListModel.clear();
+                    System.out.println(AccountListModel.getSize());
+                    
+                    theCustomer.populateJListFromArrayList(AccountListModel);
+                    
                     theCustomer.loadISAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", theCustomer);
+                    theCustomer.populateJListFromArrayList(AccountListModel);
+                    
                     theCustomer.loadSAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", theCustomer);
+                    theCustomer.populateJListFromArrayList(AccountListModel);
                 } else jClientsTextArea.setText("Customer not found.");
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
         } else jStatusMessageLabel.setText("Please, specify all customer details.");
@@ -2088,16 +2092,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jClientsTextArea.setText(null);
         bankClients.display(jClientsTextArea);
     }//GEN-LAST:event_jDisplayClientInformationBtnActionPerformed
-    //fix new
-    private void jDisplayCustomersAccountsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayCustomersAccountsBtnActionPerformed
-        String sortCode = jSortCodeTextField.getText();
-        int accNo = Integer.parseInt(jNumberTextField.getText());
-        
-        if(theCustomer!=null){
-            
-        } else jStatusMessageLabel.setText("Please, find the client first.");
-    }//GEN-LAST:event_jDisplayCustomersAccountsBtnActionPerformed
-    //new
+
+   //new
     private void jGenerateStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGenerateStatementBtnActionPerformed
         
     }//GEN-LAST:event_jGenerateStatementBtnActionPerformed
@@ -2275,7 +2271,6 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jDisplayBranchDetailsButton;
     private javax.swing.JButton jDisplayBranchesBtn;
     private javax.swing.JButton jDisplayClientInformationBtn;
-    private javax.swing.JButton jDisplayCustomersAccountsBtn;
     private javax.swing.JButton jDisplayPersonAddressButton;
     private javax.swing.JButton jDisplayPersonDetailsButton;
     private javax.swing.JButton jDisplaySubDeps;

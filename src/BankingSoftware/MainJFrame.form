@@ -1407,10 +1407,7 @@
                                               <Component id="jImportClientsfromFileBtn" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="jOpenNewAccountBtn" alignment="0" pref="240" max="32767" attributes="0"/>
-                                              <Component id="jDisplayCustomersAccountsBtn" alignment="0" max="32767" attributes="0"/>
-                                          </Group>
+                                          <Component id="jOpenNewAccountBtn" min="-2" pref="240" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="jRemoveClientBtn" min="-2" pref="113" max="-2" attributes="0"/>
@@ -1447,7 +1444,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel2" min="-2" pref="14" max="-2" attributes="0"/>
@@ -1534,20 +1531,18 @@
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jDisplayClientInformationBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jImportClientsfromFileBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jDisplayCustomersAccountsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jExportClientstoFileBtn" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jAddClientBtn" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jOpenNewAccountBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jOpenNewAccountBtn" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jSummarySelectedAccBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jRemoveClientBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -1817,14 +1812,6 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Summary for selected account"/>
                   </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="jDisplayCustomersAccountsBtn">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Display all acounts for the client"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jDisplayCustomersAccountsBtnActionPerformed"/>
-                  </Events>
                 </Component>
                 <Container class="javax.swing.JScrollPane" name="jScrollPane5">
                   <AuxValues>
