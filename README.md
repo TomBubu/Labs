@@ -1,10 +1,10 @@
 # Labs
 ----- 
 **Clients tab:**
-- Save accounts to client file
+- Save accounts to client file [done]
 - Load a particular client file when client logs in
-- Load all client files when bank employee logs in
-- Update: Employee will load list of all clients. Then he/she will search for a client. We can load a particular client file in that moment because the first name and surname will be specified and it will make it easier for us. 
+- Load all client files when bank employee logs in [done]
+- Update: Employee will load list of all clients. Then he/she will search for a client. We can load a particular client file in that moment because the first name and surname will be specified and it will make it easier for us. [done]
 
 **Transactions tab:**
 - Log deposit and withdrawal transactions in the GUI
@@ -44,23 +44,6 @@
 
 ### Possible error locations:
 - Class   |   Line
-
-
------
-
-### Possible implementation of the Customer's accounts
-- int k = number of accounts for a client. Then I will load the variable k, and I will read for i=1; i <= k; i++ of accounts with various variables for each account. 
-
-- It will then have accountHolder object params: first name, surname, CustomerSince, and DOB parameters. 
-But every accountHolder object also has theAddressObject related to it and required by ClsCustomer constructor. 
-.....
-
-- **That leads to alternative:** those (customerObject and therefore its address) are already loaded by searching the customer. So foundCustomer is accountHolder and address object can be the associated object to the found customer.
-
-- Further on, the type will be the first attribute of the account details/array. It will be read as first, then all other attributes and then a new account of that particular type will be created from all the values.
-Then a new line will be read. That means 1 account will be on 1 line and a new account will be created with the type as specified by an admin in the GUI.
-[done]
-
 
 -----
 **Markdown cheatsheet:**
