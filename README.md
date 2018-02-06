@@ -18,13 +18,6 @@
 - Ability to approve transactions for bank employees? How to implement this? Sockets?
 
 **Immediate tasks check:**
-- Display account   [done]
-- Open new account  [done]
-- Show summary for selected account [done]
-- Bug: Search for client works. Client object is selected. Account is added. Now it is possible to display account details.
-    - Once the same client is searched for, it is no longer possible to display the account and it seems it is not in the array ?
-    - Once a new account is created for the same account (without searching for the same client meanwhile), the previous account disappears? from the array
-    - **Fix: remove empty line from client file, save the array ownedAccounts to client file, load from client file depending on the client name and surname**[done]  
 - Fix attributes in ClsAccount
 - Fix attributes to DATEs from STRINGs
 
@@ -51,9 +44,7 @@
 
 ### Possible error locations:
 - Class   |   Line
-- ClsCustomer |   229
-- ClsAccount  |   81
-- MainJFrame    |   2084
+
 
 -----
 
@@ -68,7 +59,7 @@ But every accountHolder object also has theAddressObject related to it and requi
 
 - Further on, the type will be the first attribute of the account details/array. It will be read as first, then all other attributes and then a new account of that particular type will be created from all the values.
 Then a new line will be read. That means 1 account will be on 1 line and a new account will be created with the type as specified by an admin in the GUI.
- 
+[done]
 
 
 -----
