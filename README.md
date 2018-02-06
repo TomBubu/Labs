@@ -1,10 +1,7 @@
 # Labs
 ----- 
 **Clients tab:**
-- Save accounts to client file [done]
-- Load a particular client file when client logs in
-- Load all client files when bank employee logs in [done]
-- Update: Employee will load list of all clients. Then he/she will search for a client. We can load a particular client file in that moment because the first name and surname will be specified and it will make it easier for us. [done]
+- Load a particular client file when client logs in, dont display all clients.
 
 **Transactions tab:**
 - Log deposit and withdrawal transactions in the GUI
