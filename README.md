@@ -18,14 +18,13 @@
 - Ability to approve transactions for bank employees? How to implement this? Sockets?
 
 **Immediate tasks check:**
-- Display account   []
-- Open new account  []
-- Show summary for selected account []
+- Display account   [done]
+- Open new account  [done]
+- Show summary for selected account [done]
 - Bug: Search for client works. Client object is selected. Account is added. Now it is possible to display account details.
     - Once the same client is searched for, it is no longer possible to display the account and it seems it is not in the array ?
     - Once a new account is created for the same account (without searching for the same client meanwhile), the previous account disappears? from the array
-    - **Fix: remove empty line from client file, save the array ownedAccounts to client file, load from client file depending on the client name and surnam.e**  
-- ClsCustomer:line 229, method loadFromFile(...){} needs to be called for client. Check comment on line 233.
+    - **Fix: remove empty line from client file, save the array ownedAccounts to client file, load from client file depending on the client name and surname**[done]  
 - Fix attributes in ClsAccount
 - Fix attributes to DATEs from STRINGs
 
