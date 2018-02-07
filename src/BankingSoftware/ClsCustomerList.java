@@ -10,10 +10,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-//import java.util.Date;
+import java.util.Date;
+//import java.sql.Date;
 import java.util.Scanner;
 import javax.swing.JTextArea;
+
+
 
 /**
  *
@@ -48,6 +52,7 @@ public class ClsCustomerList {
         return new_size > old_size;
     }
     
+    /* Original method
     public boolean deleteCustomer(String surname, String firstName, String DOB){
         int old_Array_size = theClients.size();
         int new_Array_size = old_Array_size;
@@ -60,6 +65,22 @@ public class ClsCustomerList {
             ){
                 new_Array_size--;
                 theClients.remove(i);
+            }
+        }
+        return (new_Array_size < old_Array_size);
+    }    
+    */
+    
+    // New method below:
+    public boolean deleteCustomer(ClsCustomer aCustomer){
+        int old_Array_size = theClients.size();
+        int new_Array_size = old_Array_size;
+        
+        for (int i=0; i < theClients.size(); i++){
+            if (theClients.get(i).isTheSame(aCustomer)){
+                theClients.remove(i);
+                new_Array_size--;
+                //System.out.println("Removed.\n");
             }
         }
         return (new_Array_size < old_Array_size);
@@ -107,41 +128,52 @@ public class ClsCustomerList {
             
             //I need to increment i by 4 each time, because one client is made of 4 entries
             for (int i = 0; i < words.size() - 12; i += 12) {
+         
                 
-                //new SimpleDateFormat("dd/MM/yyyy").parse(DetailsArray[i+2]);
-                //System.out.println(new SimpleDateFormat("dd/MM/yyyy").parse(DetailsArray[i+2]));
+                //Date dob = new SimpleDateFormat("dd/MM/yyyy").parse(DetailsArray[i+2]);
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                //java.util.Date dateOB = sdf.parse(DetailsArray[i+2]);
+                // sources: 
+                // https://stackoverflow.com/questions/1908387/java-date-cut-off-time-information
+                // https://stackoverflow.com/questions/24320378/how-do-i-format-a-java-sql-date-into-this-format-mm-dd-yyyy
                 
-                //Date omg = new SimpleDateFormat("dd/MM/yyyy").parse(DetailsArray[i+2]);
-                /*SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                java.util.Date dateOB = sdf.parse(DetailsArray[i+2]);
-                */
+                // Define format
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 
+                // Get strings, which will be dates
+                String strDOB = DetailsArray[i+2];
+                String strCustomerSince = DetailsArray[i+3];
+
+                // Parse strings to java.util.Date
+                Date DOB = sdf.parse(strDOB);
+                Date customerSince = sdf.parse(strCustomerSince);
+
+                // Convert java.util.Date to sql.Date. This strips the time part off
+                java.sql.Date sqlDOB = new java.sql.Date(DOB.getTime());
+                java.sql.Date sqlCS = new java.sql.Date(customerSince.getTime());
+                
+                // Format the sql.Dates
+                String noTimeDOB = sdf.format(sqlDOB);
+                String noTimeSC = sdf.format(sqlCS);
+  
+                // Testing
+                //System.out.println("DOB " + noTimeDOB + "\n");
+                //System.out.println("CSince " + noTimeSC + "\n");
+             
                 ClsCustomer newCustomer = new ClsCustomer(
-                        DetailsArray[i].replace("[", ""), 
-                        DetailsArray[i+1], 
-                        DetailsArray[i+2],
-                        DetailsArray[i+3],
-                        //Integer.parseInt(DetailsArray[i+4]),
-                        
+                        DetailsArray[i].replace("[", ""), DetailsArray[i+1], 
+                        //DetailsArray[i+2],
+                        sqlDOB,
+                        //DetailsArray[i+3],
+                        sqlCS,
+
                         new ClsIAddress(
-                                DetailsArray[i + 4],
-                                DetailsArray[i + 5],
+                                DetailsArray[i + 4], DetailsArray[i + 5],
                                 Integer.parseInt(DetailsArray[i + 6]),
-                                DetailsArray[i + 7],
-                                DetailsArray[i + 8],
-                                DetailsArray[i + 9],
-                                DetailsArray[i + 10],
+                                DetailsArray[i + 7], DetailsArray[i + 8],
+                                DetailsArray[i + 9], DetailsArray[i + 10],
                                 DetailsArray[i + 11].replace("]", "")
                         )
-                        /*,
-                        new ClsAccount(
-                                DetailsArray[i+12],
-                                Integer.parseInt(DetailsArray[i+13]),
-                                Double.parseDouble(DetailsArray[i+14]),
-                                DetailsArray[i+15],
-                                Double.parseDouble(DetailsArray[i+16].replace("]", ""))
-                        )
-                        */
                 );
                 theClients.add(newCustomer);
             }
@@ -153,6 +185,8 @@ public class ClsCustomerList {
     public boolean findCustomer(JTextArea src, ClsCustomer aCustomer) {
         boolean found = false;
         for (ClsCustomer Client : theClients) {
+            //if(Client.isTheSame(aCustomer)){System.out.println("all good 2. \n");}
+            //System.out.println(aCustomer.outputCustomerDetails()+"\n");
             if (Client.isTheSame(aCustomer)) {
                 Client.displayCustomerDetails(src);
                 Client.getCustomerAddress().display(src, 0);
@@ -162,39 +196,7 @@ public class ClsCustomerList {
         if (!found) {
             return found = false;
         }
-        // possible error
         return found;
     }
     
-    // Code repetition below
-    /*
-    public ClsCustomer findCustomerinArray(String firstName, String surname, String DOB) {
-        ClsCustomer aCustomer = new ClsCustomer();
-        for (int i = 0; i < theClients.size(); i++) {
-            if (    theClients.get(i).getCustomerDetails()[0].equals(firstName)  &&
-                    theClients.get(i).getCustomerDetails()[1].equals(surname)    &&
-                    theClients.get(i).getCustomerDetails()[2].equals(DOB)
-            ){
-                aCustomer = theClients.get(i);
-            }
-        }
-        return aCustomer;
-    }
-    */
-    // not needed now
-    /*
-    public void findCustomerAccount(JTextArea src, ClsCustomer aCustomer) {
-        boolean found = false;
-
-        for (ClsCustomer Client : theClients) {
-            if (Client.isTheSame(aCustomer)) {
-                //Client.getCustomerAccount().Display(src);
-                found = true;
-            }
-        }
-        if (!found) {
-            src.setText("Customer not found.");
-        }
-    }
-    */
 }
