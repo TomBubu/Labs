@@ -16,7 +16,6 @@
 
 **Immediate tasks check:**
 - Fix attributes in ClsAccount
-- Fix attributes to DATEs from STRINGs
 
 -----
 
