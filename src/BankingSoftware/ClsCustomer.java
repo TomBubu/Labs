@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 import java.util.Scanner;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextArea;
@@ -30,14 +32,10 @@ public class ClsCustomer {
         
     private String FirstName;
     private String Surname;
-    //private Date DOB;
-    private String CustomerSince;
-    private String DOB;
-    
-    /* Conversion of Date DOB to String DOBString
-    Format formatter = new SimpleDateFormat("dd/MM/yyyy");
-    String DOBString = formatter.format(DOB);
-    */
+    private Date DOB;
+    private Date CustomerSince;
+    //private String DOB;
+    //private String CustomerSince;
 
     // Default constructor
     public ClsCustomer(){
@@ -47,13 +45,19 @@ public class ClsCustomer {
 
         FirstName = " ";
         Surname = " ";
-        //DOB = new Date(01/01/1900);
-        //DOB = new SimpleDateFormat("01/01/1900");
-        CustomerSince = "01/01/1900";
-        DOB = "01/01/1900";
+        DOB = new Date(01/01/1900);
+        CustomerSince = new Date(01/01/1900);
+        //CustomerSince = "01/01/1900";
+        //DOB = "01/01/1900";
     }
     
+    /* No date:
     public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject){
+        editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject);
+    }
+    */
+    
+    public ClsCustomer(String firstName, String surname, Date DOB, Date customerSince, ClsIAddress theAddressObject){
         editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject);
     }
    
@@ -64,28 +68,21 @@ public class ClsCustomer {
     }
     */
     
-    //Fix this StringToDate
-    /*
-    public String StringToDate() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        DOB = df.format(new Date());
-        return DOB;
-    }
-    */
-    
     public void displayCustomerAddress(JTextArea src){
         homeAddress.display(src, 0);
     }
     
     public void displayCustomerDetails(JTextArea src){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         src.append(
                 "First name: "      + this.FirstName        + "\n"  +
                 "Surname: "         + this.Surname          + "\n"  +
-                "Date of Birth: "   + this.DOB              + "\n"  +
-                "Customer since: "  + this.CustomerSince    + "\n"  
+                "Date of Birth: "   + sdf.format(this.DOB)              + "\n"  +
+                "Customer since: "  + sdf.format(this.CustomerSince)    + "\n"  
         );
     }
     
+    /*
     public void editCustomerDetails(String firstName, String surname, String strDOB, String customerSince, ClsIAddress addressObject){
         this.FirstName = firstName;
         this.Surname = surname;
@@ -94,6 +91,15 @@ public class ClsCustomer {
         this.homeAddress = addressObject;
         //this.CustomerAccount = theAccountObject;
         //this.ownedAccounts = theAccountObject;
+    }
+    */
+    
+    public void editCustomerDetails(String firstName, String surname, Date DOB, Date customerSince, ClsIAddress addressObject){
+        this.FirstName = firstName;
+        this.Surname = surname;
+        this.DOB = DOB;
+        this.CustomerSince = customerSince;
+        this.homeAddress = addressObject;
     }
     
     /*
@@ -128,13 +134,22 @@ public class ClsCustomer {
         String[] CustomerDetails = new String[5];
         CustomerDetails[0] = this.FirstName;
         CustomerDetails[1] = this.Surname;
-        CustomerDetails[2] = this.DOB/*.toString()*/;
-        CustomerDetails[3] = this.CustomerSince;
+        //CustomerDetails[2] = this.DOB;
+        //CustomerDetails[3] = this.CustomerSince;
+        
+        CustomerDetails[2] = this.DOB.toString();
+        System.out.println(CustomerDetails[2]);
+        
+        CustomerDetails[3] = this.CustomerSince.toString();
+        System.out.println(CustomerDetails[3]);
         return CustomerDetails;
     }
     
+    
+    
     public String outputCustomerDetails(){
-        return "["+this.FirstName+", "+this.Surname+", "+this.DOB+", "+this.CustomerSince+", ";
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return "["+this.FirstName+", "+this.Surname+", "+sdf.format(this.DOB)+", "+sdf.format(this.CustomerSince)+", ";
     }
     
     public ClsIAddress getCustomerAddress(){
@@ -148,6 +163,10 @@ public class ClsCustomer {
     */
     
     public boolean isTheSame(ClsCustomer aCustomer){
+        //System.out.print("class customer dob: " + DOB + "\n");
+        //System.out.print("objects dob passed from gui: " + aCustomer.DOB + "\n");
+        //if(this.DOB.equals(aCustomer.DOB) == true){System.out.println("all good");}
+        
         if(
           this.FirstName.equals(aCustomer.FirstName) &&
           this.Surname.equals(aCustomer.Surname) &&

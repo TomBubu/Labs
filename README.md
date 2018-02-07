@@ -41,6 +41,12 @@
 
 ### Possible error locations:
 - Class   |   Line
+- ClsCustomer | 65, 93, 110, 155
+- ClsCustomerList | 118 + 122, 127 + 129 
+- MainfJFrame | 1996 (Search client), 2072 (Add client)
+
+
+
 
 -----
 **Markdown cheatsheet:**

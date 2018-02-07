@@ -5,7 +5,9 @@
  */
 package BankingSoftware;
 
+import java.util.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -375,7 +377,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(jLoginPanelLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(jRegisterButton)))
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(294, Short.MAX_VALUE))
         );
 
         jRoleComboBox.setSelectedIndex(0);
@@ -629,7 +631,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jDisplayBranchDetailsButton))
                     .addComponent(jHeadOfficeAddressScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(273, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Head Office Address", jHeadOfficeAddressPanel);
@@ -989,7 +991,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jBranchesSaveToFileBtn)
                     .addComponent(jBranchesLoadFromFileBtn)
                     .addComponent(jRemoveSubdeptBtn))
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Branches", jBranchesPanel);
@@ -1231,10 +1233,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jClientsPanelLayout.createSequentialGroup()
                                 .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jClientFirstNameLabel)
                                     .addComponent(jClientHouseNameLabel)
@@ -1276,23 +1274,31 @@ public class MainJFrame extends javax.swing.JFrame {
                                     .addGroup(jClientsPanelLayout.createSequentialGroup()
                                         .addComponent(jClientCountryLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jClientCountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(jClientCountryTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18))
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
                                 .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jSortCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jAccountNumberLabel1)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jClientsPanelLayout.createSequentialGroup()
+                                        .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jClientsPanelLayout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jSortCodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jAccountNumberLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jAccountBalanceLabel)
+                                                .addGap(37, 37, 37)
+                                                .addComponent(jBankNameLabel))
+                                            .addComponent(jSortCodeLabel))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jNumberTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jAccountBalanceLabel)
-                                        .addGap(37, 37, 37)
-                                        .addComponent(jBankNameLabel))
-                                    .addComponent(jSortCodeLabel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jBankNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jBankNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(1, 1, 1)))
                         .addComponent(jSearchForClientBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1453,7 +1459,7 @@ public class MainJFrame extends javax.swing.JFrame {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(12, 12, 12)
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Transactions", jTransactionsPanel);
@@ -1987,8 +1993,14 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jSearchForClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchForClientBtnActionPerformed
         String firstName = jClientFirstNameTextField.getText();
         String lastName = jClientSurnameTextField.getText();
-        String DOB = jClientDOBTextField.getText();
-        String customerSince = jClientSinceTextField.getText();
+        // Date fields
+        String fieldDOB = jClientDOBTextField.getText();
+        String fieldCustomerSince = jClientSinceTextField.getText();
+        // Date formatter
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Date timeDOB = new Date();
+        Date timeCS = new Date();
 
         String houseName = jClientHouseNameTextField.getText();
         Integer houseNo = Integer.parseInt(jClientHouseNumberTextField.getText());
@@ -1998,13 +2010,27 @@ public class MainJFrame extends javax.swing.JFrame {
         String town = jClientTownTextField.getText();
         String country = jClientCountryTextField.getText();
 
-        if (!(firstName.equals("") || lastName.equals("") || DOB.equals("") || customerSince.equals("")
+        if (!(firstName.equals("") || lastName.equals("") || fieldDOB.equals("") || fieldCustomerSince.equals("")
                 || houseName.equals("") || houseNo == 0 || street.equals("") || area.equals("")
                 || postCode.equals("") || town.equals("") || country.equals(""))) 
         {
-            if (theCustomer.checkDOBFormat(jClientDOBTextField.getText())) {
+            if (theCustomer.checkDOBFormat(jClientDOBTextField.getText()) && theCustomer.checkDOBFormat(jClientSinceTextField.getText())) {
+    
+                try {
+                    timeDOB = sdf.parse(fieldDOB);
+                    timeCS = sdf.parse(fieldCustomerSince);
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                java.sql.Date sqlDOB = new java.sql.Date(timeDOB.getTime());
+                java.sql.Date sqlCS = new java.sql.Date(timeCS.getTime());
+
+                //System.out.println("MainFrame sqlDOB: " + sqlDOB + "\n");
+                //System.out.println("MainFrame sqlCS: " + sqlCS + "\n");
+                
                 theAddress = new ClsIAddress(firstName, houseName, houseNo, street, area, postCode, town, country);
-                theCustomer = new ClsCustomer(firstName, lastName, DOB, customerSince, theAddress);//,thePersonAccount
+                theCustomer = new ClsCustomer(firstName, lastName, sqlDOB, sqlCS, theAddress);
                 jClientsTextArea.setText("");
                 
                 if(bankClients.findCustomer(jClientsTextArea, theCustomer)){
@@ -2014,7 +2040,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     theCustomer.loadCAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", theCustomer);
                     
                     AccountListModel.clear();
-                    System.out.println(AccountListModel.getSize());
+                    //System.out.println(AccountListModel.getSize());
                     
                     theCustomer.populateJListFromArrayList(AccountListModel);
                     
@@ -2051,17 +2077,60 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jExportClientstoFileBtnActionPerformed
     //done
     private void jRemoveClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRemoveClientBtnActionPerformed
-        if ( bankClients.deleteCustomer(jClientSurnameTextField.getText(), jClientFirstNameTextField.getText(), jClientDOBTextField.getText() ) ) {
-            jStatusAnimationLabel.setText("Customer removed successfully, please click Display button again.");
-        }
-        else jStatusAnimationLabel.setText("Could not remove the customer, please check if the First name" + "\n" + ", Last name and DOB correspond.");
+        String firstName = jClientFirstNameTextField.getText();
+        String lastName = jClientSurnameTextField.getText();
+        String fieldDOB = jClientDOBTextField.getText();
+        String fieldCustomerSince = jClientSinceTextField.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date timeDOB = new Date();
+        Date timeCS = new Date();
+        String houseName = jClientHouseNameTextField.getText();
+        Integer houseNo = Integer.parseInt(jClientHouseNumberTextField.getText());
+        String street = jClientStreetTextField.getText();
+        String area = jClientAreaTextField.getText();
+        String postCode = jClientPostCodeTextField.getText();
+        String town = jClientTownTextField.getText();
+        String country = jClientCountryTextField.getText();
+
+        if (!(firstName.equals("") || lastName.equals("") || fieldDOB.equals("") || fieldCustomerSince.equals("")
+                || houseName.equals("") || houseNo == 0 || street.equals("") || area.equals("")
+                || postCode.equals("") || town.equals("") || country.equals("")))
+        {
+            if (theCustomer.checkDOBFormat(jClientDOBTextField.getText()) && theCustomer.checkDOBFormat(jClientSinceTextField.getText())) {
+                try {
+                    timeDOB = sdf.parse(fieldDOB);
+                    timeCS = sdf.parse(fieldCustomerSince);
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                java.sql.Date sqlDOB = new java.sql.Date(timeDOB.getTime());
+                java.sql.Date sqlCS = new java.sql.Date(timeCS.getTime());
+                
+                theAddress = new ClsIAddress(firstName, houseName, houseNo, street, area, postCode, town, country);
+                theCustomer = new ClsCustomer(firstName, lastName, sqlDOB, sqlCS, theAddress);
+                jClientsTextArea.setText("");
+                if(bankClients.findCustomer(jClientsTextArea, theCustomer)){
+                    bankClients.deleteCustomer(theCustomer);
+                    jStatusAnimationLabel.setText("Customer removed successfully. Please, refresh the list.");
+                }
+                else jStatusAnimationLabel.setText("Could not remove the customer, please check if the First name" + "\n" + ", Last name and DOB correspond.");
+                
+            }
+        }  
     }//GEN-LAST:event_jRemoveClientBtnActionPerformed
     //done
     private void jAddClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAddClientBtnActionPerformed
         String firstName = jClientFirstNameTextField.getText();
         String lastName = jClientSurnameTextField.getText();
-        String DOB = jClientDOBTextField.getText();
-        String customerSince = jClientSinceTextField.getText();
+        // Date fields
+        String fieldDOB = jClientDOBTextField.getText();
+        String fieldCustomerSince = jClientSinceTextField.getText();
+        // Date formatter
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        Date timeDOB = new Date();
+        Date timeCS = new Date();
+
 
         String firstName2 = jClientFirstNameTextField.getText();
         String houseName = jClientHouseNameTextField.getText();
@@ -2073,15 +2142,27 @@ public class MainJFrame extends javax.swing.JFrame {
         String country = jClientCountryTextField.getText();
 
         // Field verification
-        if (!(  firstName.equals("") || lastName.equals("") || DOB.equals("") || customerSince.equals("") 
+        if (!(  firstName.equals("") || lastName.equals("") || fieldDOB.equals("") || fieldCustomerSince.equals("") 
                 || houseName.equals("")  || houseNo == 0 || street.equals("")  || area.equals("")  
                 || postCode.equals("")  || town.equals("")  || country.equals(""))) 
         {
-            if (theCustomer.checkDOBFormat(jClientDOBTextField.getText())) {
-                //thePerson = new ClsPerson(firstName, lastName, DOB, customerSince);
+            if (theCustomer.checkDOBFormat(jClientDOBTextField.getText()) && theCustomer.checkDOBFormat(jClientSinceTextField.getText())) {
+
+                try {
+                    timeDOB = sdf.parse(fieldDOB);
+                    timeCS = sdf.parse(fieldCustomerSince);
+                } catch (ParseException ex) {
+                    Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                java.sql.Date sqlDOB = new java.sql.Date(timeDOB.getTime());
+                java.sql.Date sqlCS = new java.sql.Date(timeCS.getTime());
+
+                //System.out.println("MainFrame sqlDOB: " + sqlDOB + "\n");
+                //System.out.println("MainFrame sqlCS: " + sqlCS + "\n");
+                
                 theAddress = new ClsIAddress(firstName2, houseName, houseNo, street, area, postCode, town, country);
 
-                if (bankClients.addCustomer(theCustomer = new ClsCustomer(firstName, lastName, DOB, customerSince, theAddress/*, thePersonAccount*/))) {
+                if (bankClients.addCustomer(theCustomer = new ClsCustomer(firstName, lastName, sqlDOB, sqlCS, theAddress/*, thePersonAccount*/))) {
                     jStatusAnimationLabel.setText("Customer added successfully.");
                 } else jStatusAnimationLabel.setText("Could not add the customer.");
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
@@ -2092,8 +2173,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jClientsTextArea.setText(null);
         bankClients.display(jClientsTextArea);
     }//GEN-LAST:event_jDisplayClientInformationBtnActionPerformed
-
-   //new
+    //new
     private void jGenerateStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGenerateStatementBtnActionPerformed
         
     }//GEN-LAST:event_jGenerateStatementBtnActionPerformed
