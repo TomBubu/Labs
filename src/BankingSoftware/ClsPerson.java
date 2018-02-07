@@ -23,9 +23,8 @@ public class ClsPerson {
     
     private String firstName;
     private String surname;
-    private String customerSince;
-    //private Date DOB;
-    private String dateOB;
+    private Date DOB;
+    private Date customerSince;
     
     /* Conversion of Date DOB to String DOBString
     Format formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -35,42 +34,37 @@ public class ClsPerson {
     // Default constructor
     public ClsPerson(){
         PersonAddress = new ClsIAddress();
-
-        firstName = "";
-        surname = "";
-        dateOB = "01/01/1900";
-        customerSince = "01/01/1900";
+        firstName = " ";
+        surname = " ";
+        DOB = new Date(01/01/1900);
+        customerSince = new Date(01/01/1900);
     }
     
-    public ClsPerson(String name, String surname, String strDOB, String customerSince){
-        editPersonDetails(name, surname, strDOB, customerSince);
+    public ClsPerson(String name, String surname, Date DOB, Date customerSince){
+        editPersonDetails(name, surname, DOB, customerSince);
     }
     
     /*##########################################################################################*/
     /*####################################### Methods ##########################################*/
     /*##########################################################################################*/
-    public String StringToDate() {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        this.dateOB = df.format(new Date());
-        return this.dateOB;
-    }
-    
     public void displayPersonAddress(JTextArea src){
         PersonAddress.display(src, 0);
     }
     
     public void DisplayPersonDetails(JTextArea src){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         src.setText(
-                "First name: "      + this.firstName    + "\n"  +
-                "Surname: "         + this.surname      + "\n"  +
-                "Date of Birth: "   + this.dateOB       + "\n"  +
-                "Customer since: "  + this.customerSince);
+                "First name: "      + this.firstName        + "\n"  +
+                "Surname: "         + this.surname          + "\n"  +
+                "Date of Birth: "   + sdf.format(this.DOB)  + "\n"  +
+                "Customer since: "  + sdf.format(this.customerSince)
+        );
     }
     
-    public void editPersonDetails(String name, String surname, String strDOB, String customerSince){
+    public void editPersonDetails(String name, String surname, Date DOB, Date customerSince){
         this.firstName = name;
         this.surname = surname;
-        this.dateOB = strDOB;
+        this.DOB = DOB;
         this.customerSince = customerSince;
     }
     

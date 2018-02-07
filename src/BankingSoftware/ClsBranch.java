@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 import javax.swing.JTextArea;
 
 /**
@@ -25,8 +26,10 @@ public class ClsBranch {
     
     // Default constructor
     public ClsBranch(){
+        //Date defaultDate = new Date(01/01/1900);
+        //java.sql.Date sqlDD = new java.sql.Date(defaultDate.getTime());
         theAddress = new ClsIAddress(" ", " ", 0, " ", " ", " ", " ", " ");
-        theManager = new ClsPerson(" ", " ", " ", " ");
+        theManager = new ClsPerson(" ", " ", new Date(01/01/1900), new Date(01/01/1900));
         workingHours = "9:00-17:00";
         sortCode = "00-00-00";
     }
@@ -35,7 +38,6 @@ public class ClsBranch {
             String sortCode, String workingHours)
     { 
         theAddress = new ClsIAddress();
-        
         editBranchAddress(name, houseName, houseNo, street, area, postCode, town, country);
         editBranchDetails(sortCode, workingHours);
     }
@@ -44,7 +46,6 @@ public class ClsBranch {
     /*####################################### Methods ##########################################*/
     public void displayBranchAddress(JTextArea src){
        theAddress.display(src, 1);
-       //src.append("\n" + "Working hours :" + workingHours + "\n" + "Sort code: " + sortCode + "\n" + "Manager: " + Manager);
     }
    
     public void displayBranchDetails(JTextArea src){
@@ -134,10 +135,8 @@ public class ClsBranch {
     public void saveToSubDepartmentsFile(BufferedWriter srcWriter) {
         try {
             srcWriter.write(theAddress.outputAddress());
-            //branchName+", "+houseName+", "+houseNo+", "+street+", "+area+", "+postCode+", "+town+", "+country;
             srcWriter.write(", ");
             srcWriter.write(branchDetailsOutput());
-            //sortCode + ", " + workingHours
             srcWriter.write(System.getProperty("line.separator"));
             srcWriter.write("EmptyLine");
             System.gc();
