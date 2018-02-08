@@ -35,24 +35,18 @@ public class ClsCurrentAccount extends ClsAccount{
         create(conditions, availableBalance, overdraftLimit, fee);
     }
     
+    
     public void display(){
         
     }
+    
     
     public void create(String conditions, double availableBalance, double overdraftLimit, double fee){
         this.conditions = conditions;
         this.availableBalance = availableBalance;
         this.overdraftLimit = overdraftLimit;
         this.fee = fee;
-    }
-    
-    /*
-    public String display(){
-        return super.displayNewAccount();
-    }
-    */
-    
-    //task 1, step 5
+    }  
 
     @Override
     public void saveToFile(BufferedWriter bw){

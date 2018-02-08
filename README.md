@@ -24,7 +24,7 @@
 5. Enhance transactions tab and implement full functionality
 6. Person class <=> customer class ?
 	- Customer is a person. Customer will inherit person's methods?
-7. Check default values for account, person and customer classes, fill them into the class diagram.
+7. Check default values for account, customer classes, fill them into the class diagram.
 8. All account classes will probably have an error where variable "days" is used. Fix as required.
 9. Implement Date variable in transaction and account classes.
 10. After accounts and transactions are done, study factories and sockets.

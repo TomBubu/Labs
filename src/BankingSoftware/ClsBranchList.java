@@ -43,12 +43,12 @@ public class ClsBranchList {
         return new_size > old_size;
     }
             
-    public boolean deleteBranch(String branchName){
+    public boolean deleteBranch(String name){
         int old_size = theBranches.size();
         int new_size = old_size;
 
         for (int i = 0; i < theBranches.size(); i++) {
-            if (theBranches.get(i).getBranchName().equals(branchName) ) {
+            if (theBranches.get(i).getBranchName().equals(name) ) {
                 theBranches.remove(i);
                 new_size--;
             }
@@ -132,10 +132,10 @@ public class ClsBranchList {
         return SubDepartments;
     }
    
-    public ClsBranch findBranch(String branchName) {
+    public ClsBranch findBranch(String name) {
         ClsBranch theBranch = new ClsBranch();
         for (ClsBranch Branch : SubDepartments.theBranches) {
-            if (Branch.getBranchName().matches(branchName)) {
+            if (Branch.getBranchName().matches(name)) {
                 //System.out.println(Branch.getBranchName());
                 theBranch = Branch;
                 //System.out.println(Branch.outputBranchDetails());

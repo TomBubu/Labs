@@ -6,7 +6,6 @@
 package BankingSoftware;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.util.Date;
 import javax.swing.JTextArea;
 
@@ -21,16 +20,15 @@ public abstract class ClsAccount {
     protected double balance;
     protected String nameOfBank;
     protected double rate;
-    //protected Date openingDate;
     protected Date transactionDate;
     protected Date openingDate;
     protected int transactions;
+    protected ClsCurrentAccount coHolder;
     
     private boolean joint;
     private Date lastReportedDate;
-    
     private ClsCustomer accountHolder;
-    protected ClsCurrentAccount coHolder;
+    
     
     public ClsAccount() {
         create(" ", " ", 0, 0.0d, " ", 1.20, 0, accountHolder);
@@ -77,37 +75,16 @@ public abstract class ClsAccount {
     }
     
     /*
-    public void transfer(in toAccount){     //WHAT TYPE?
+    public void transfer(in toAccount){
     }
     */
-    
-    /*
-    public void saveToFile(BufferedWriter bwfCustomerList){
-        try {
-            //possibly more attributes should be written out 
-            // and array of accounts should be written out... but how am i supposed to load in variable amount of fields from a file???
-            bwfCustomerList.write(", " + sortCode + ", " + accountNo + ", " + balance + ", " + nameOfBank + "]"); 
-        } catch (IOException ioe1) {
-            System.out.println("IO Problem: " + ioe1);
-            ioe1.printStackTrace();
-            try {
-                if (bwfCustomerList != null) {
-                    bwfCustomerList.close();
-                }
-            } catch (IOException ioe2) {
-                ioe2.printStackTrace();
-                System.out.println("IO Problem: " + ioe2);
-            }
-        }
-    }
-    */
-    
+
     public boolean isTheSame(ClsAccount anAccount) {
         if(
-            sortCode.equals(anAccount.sortCode) &&
+            this.sortCode.equals(anAccount.sortCode) &&
             this.accountNo == (anAccount.accountNo) &&
             this.balance == (anAccount.balance) &&
-            nameOfBank.equals(anAccount.nameOfBank)        
+            this.nameOfBank.equals(anAccount.nameOfBank)        
         ){
             return true;
         } 
@@ -142,7 +119,6 @@ public abstract class ClsAccount {
         src.append(
                 "Transactions:" + transactions  + "\n" + 
                 "Balance: "     + balance       + "\n"  
-                // Shouldnt balance of each account be different?
         );
         transactions = 0;
     }

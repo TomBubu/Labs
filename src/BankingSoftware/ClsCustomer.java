@@ -34,39 +34,21 @@ public class ClsCustomer {
     private String Surname;
     private Date DOB;
     private Date CustomerSince;
-    //private String DOB;
-    //private String CustomerSince;
 
     // Default constructor
     public ClsCustomer(){
         //thePerson = new ClsPerson();
         homeAddress = new ClsIAddress();
         ownedAccounts = new ArrayList<>();
-
         FirstName = " ";
         Surname = " ";
         DOB = new Date(01/01/1900);
         CustomerSince = new Date(01/01/1900);
-        //CustomerSince = "01/01/1900";
-        //DOB = "01/01/1900";
     }
-    
-    /* No date:
-    public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject){
-        editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject);
-    }
-    */
     
     public ClsCustomer(String firstName, String surname, Date DOB, Date customerSince, ClsIAddress theAddressObject){
         editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject);
     }
-   
-    /*
-    public ClsCustomer(String firstName, String surname, String DOB, String customerSince, ClsIAddress theAddressObject//, ClsAccount theAccountObject){
-        editCustomerDetails(firstName, surname, DOB, customerSince, theAddressObject//, theAccountObject
-        );
-    }
-    */
     
     public void displayCustomerAddress(JTextArea src){
         homeAddress.display(src, 0);
@@ -81,18 +63,6 @@ public class ClsCustomer {
                 "Customer since: "  + sdf.format(this.CustomerSince)    + "\n"  
         );
     }
-    
-    /*
-    public void editCustomerDetails(String firstName, String surname, String strDOB, String customerSince, ClsIAddress addressObject){
-        this.FirstName = firstName;
-        this.Surname = surname;
-        this.DOB = strDOB;
-        this.CustomerSince = customerSince;
-        this.homeAddress = addressObject;
-        //this.CustomerAccount = theAccountObject;
-        //this.ownedAccounts = theAccountObject;
-    }
-    */
     
     public void editCustomerDetails(String firstName, String surname, Date DOB, Date customerSince, ClsIAddress addressObject){
         this.FirstName = firstName;
@@ -134,8 +104,6 @@ public class ClsCustomer {
         String[] CustomerDetails = new String[5];
         CustomerDetails[0] = this.FirstName;
         CustomerDetails[1] = this.Surname;
-        //CustomerDetails[2] = this.DOB;
-        //CustomerDetails[3] = this.CustomerSince;
         
         CustomerDetails[2] = this.DOB.toString();
         System.out.println(CustomerDetails[2]);

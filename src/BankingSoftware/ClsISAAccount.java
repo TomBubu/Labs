@@ -33,7 +33,7 @@ public class ClsISAAccount extends ClsAccount{
         create(maxDepositPerYear, depositedThisYear);
     }
     
-    public void display(int option, JLabel src){
+    public void display(/*int option, JLabel src*/){
         /*
         if(option==1){
             src.setText("Not enough funds.");

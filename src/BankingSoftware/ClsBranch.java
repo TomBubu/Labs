@@ -42,8 +42,6 @@ public class ClsBranch {
         editBranchDetails(sortCode, workingHours);
     }
     
-  
-    /*####################################### Methods ##########################################*/
     public void displayBranchAddress(JTextArea src){
        theAddress.display(src, 1);
     }

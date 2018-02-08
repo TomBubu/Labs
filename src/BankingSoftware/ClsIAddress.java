@@ -76,13 +76,13 @@ public class ClsIAddress {
         this.country = country; 
     }
     
-    public void loadFromFile(BufferedReader abufferedreader ){
+    public void loadFromFile(BufferedReader br ){
         String[] AddressArray = new String[8];
         String line;
         try{
 
             for (int index = 0; index < 8; index++) {
-                if ((line = abufferedreader.readLine()) != null) {
+                if ((line = br.readLine()) != null) {
                     AddressArray[index] = line;
                 }
             }
@@ -96,12 +96,9 @@ public class ClsIAddress {
             System.out.println("IO Problem: " + ioe3);
             ioe3.printStackTrace();
         }
-       
     }
 
-    //fix
-    public void saveToFile(FileWriter awriter)
-    {
+    public void saveToFile(FileWriter awriter){
         try{
             awriter.write(branchName + System.getProperty("line.separator"));
             awriter.write(houseName + System.getProperty("line.separator"));
@@ -118,23 +115,6 @@ public class ClsIAddress {
     public String getName() {
         return this.branchName;
     }
-    
-    /*
-    public String[] getBranchAddress(){
-        String[] BranchAddress = new String[8];
-        
-        BranchAddress[0] = name;
-        BranchAddress[1] = houseName;
-        BranchAddress[2] = houseNo.toString();
-        BranchAddress[3] = street;
-        BranchAddress[4] = area;
-        BranchAddress[5] = postCode;
-        BranchAddress[6] = town;
-        BranchAddress[7] = country;
-        
-        return BranchAddress;
-    }
-    */
     
     public String outputAddress(){
         return branchName+", "+houseName+", "+houseNo+", "+street+", "+area+", "+postCode+", "+town+", "+country;
