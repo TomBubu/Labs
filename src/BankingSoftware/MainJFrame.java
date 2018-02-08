@@ -40,11 +40,17 @@ public class MainJFrame extends javax.swing.JFrame {
         //theHeadOfficeBranch.editBranchAddress("CISCO Systems Head Office", "Bedfont Lakes", 10, "New Square", "Middlesex", "TW14 8HA", "Feltham", "UK");        
         //theHeadOfficeBranch.editBranchDetails("09:00-17:00", "12-34-56");
         thePerson.editPersonAddress("South Bank House", "Black Prince Road", 158, "Underground", "Vauxhall", "SW12 5WQ", "London", "UK");
-      
-        Date PersonDOB = new Date(01/02/1995);
-        Date PersonCS = new Date(01/05/2010);
-
-        thePerson.editPersonDetails("John", "Novak", new Date(01/02/1995), new Date(2016));
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date PersonDOB = new Date();
+        Date PersonCS = new Date();
+        try {
+            PersonDOB = sdf.parse("01/02/1995");
+            PersonCS = sdf.parse("01/05/2010");
+        } catch (ParseException ex) {
+            Logger.getLogger(MainJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        thePerson.editPersonDetails("John", "Novak", PersonDOB, PersonCS);
         theHeadOfficeBranch.loadFromFile("headBranch.txt");
         
         jTabInMemory_1 = jMainTabbedPanel.getComponentAt(1);
