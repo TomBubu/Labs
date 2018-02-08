@@ -44,9 +44,6 @@ public class ClsPerson {
         editPersonDetails(name, surname, DOB, customerSince);
     }
     
-    /*##########################################################################################*/
-    /*####################################### Methods ##########################################*/
-    /*##########################################################################################*/
     public void displayPersonAddress(JTextArea src){
         PersonAddress.display(src, 0);
     }
@@ -62,9 +59,6 @@ public class ClsPerson {
     }
     
     public void editPersonDetails(String name, String surname, Date DOB, Date customerSince){
-        System.out.println("DOB: " + DOB + "\n");
-        System.out.println("CS: " + customerSince + "\n");
-        
         this.firstName = name;
         this.surname = surname;
         this.DOB = DOB;
