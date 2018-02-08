@@ -1925,12 +1925,10 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(currentAcc/*, AccountListModel*/);
-                        //maybe
+                        theCustomer.createAccount(currentAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
                         
                         jStatusMessageLabel.setText("Account created.");
-                        //accountToBeSaved = currentAcc;
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", currentAcc);
                         break;
@@ -1940,7 +1938,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println("Account created.\n");
                         //System.out.println(theCustomer.outputCustomerDetails());
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(ISAAcc/*, AccountListModel*/);
+                        theCustomer.createAccount(ISAAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
                         
                         jStatusMessageLabel.setText("Account created.");
@@ -1954,7 +1952,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         //System.out.println(theCustomer.outputCustomerDetails());
                         jStatusMessageLabel.setText("Account created.");
                         theCustomer.createAccountList();
-                        theCustomer.createAccount(savingsAcc/*, AccountListModel*/);
+                        theCustomer.createAccount(savingsAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
                         
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", "EmptyLine");
