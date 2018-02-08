@@ -16,7 +16,7 @@
 
 **Immediate tasks check:**
 - Fix attributes in ClsAccount
-
+- Fix class diagram [done]
 -----
 
 ### Further tasks:
@@ -24,13 +24,12 @@
 5. Enhance transactions tab and implement full functionality
 6. Person class <=> customer class ?
 	- Customer is a person. Customer will inherit person's methods?
-7. Check default values for account, customer classes, fill them into the class diagram.
-8. All account classes will probably have an error where variable "days" is used. Fix as required.
-9. Implement Date variable in transaction and account classes.
-10. After accounts and transactions are done, study factories and sockets.
-11. Use case descriptions for each use case in the use case diagram.
+7. All account classes will probably have an error where variable "days" is used. Fix as required.
+8. Implement Date variable in transaction and account classes.
+9. After accounts and transactions are done, study factories and sockets.
+10. Use case descriptions for each use case in the use case diagram.
 	- Admins can create accounts for customer, save to file, calculate charges, deposit monthly and yearly interest onto accounts.
-12. Sequence diagrams for each use case in the use case diagram.
+11. Sequence diagrams for each use case in the use case diagram.
 
 99. XML Implementation of the files // possibly left for the iteration 3:
     - We will need to dynamically create XML files by XML "creator". We can use XML for iterations to sort out our headaches.
@@ -40,12 +39,6 @@
 
 ### Possible error locations:
 - Class   |   Line
-- ClsCustomer | 65, 93, 110, 155
-- ClsCustomerList | 118 + 122, 127 + 129 
-- MainfJFrame | 1996 (Search client), 2072 (Add client)
-
-
-
 
 -----
 **Markdown cheatsheet:**
