@@ -2049,7 +2049,6 @@ public class MainJFrame extends javax.swing.JFrame {
                     
                     AccountListModel.clear();
                     //System.out.println(AccountListModel.getSize());
-                    
                     theCustomer.populateJListFromArrayList(AccountListModel);
                     
                     theCustomer.loadISAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", theCustomer);
@@ -2057,6 +2056,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     
                     theCustomer.loadSAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", theCustomer);
                     theCustomer.populateJListFromArrayList(AccountListModel);
+                    jClientsTextArea.setText("Customer found and selected.");
                 } else jClientsTextArea.setText("Customer not found.");
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
         } else jStatusMessageLabel.setText("Please, specify all customer details.");
@@ -2170,7 +2170,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 
                 theAddress = new ClsIAddress(firstName2, houseName, houseNo, street, area, postCode, town, country);
 
-                if (bankClients.addCustomer(theCustomer = new ClsCustomer(firstName, lastName, sqlDOB, sqlCS, theAddress/*, thePersonAccount*/))) {
+                if (bankClients.addCustomer(theCustomer = new ClsCustomer(firstName, lastName, sqlDOB, sqlCS, theAddress))) {
                     jStatusAnimationLabel.setText("Customer added successfully.");
                 } else jStatusAnimationLabel.setText("Could not add the customer.");
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
