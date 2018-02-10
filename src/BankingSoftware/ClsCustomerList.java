@@ -153,16 +153,9 @@ public class ClsCustomerList {
                 String noTimeDOB = sdf.format(sqlDOB);
                 String noTimeSC = sdf.format(sqlCS);
   
-                // Testing
-                //System.out.println("DOB " + noTimeDOB + "\n");
-                //System.out.println("CSince " + noTimeSC + "\n");
-             
                 ClsCustomer newCustomer = new ClsCustomer(
                         DetailsArray[i].replace("[", ""), DetailsArray[i+1], 
-                        //DetailsArray[i+2],
-                        sqlDOB,
-                        //DetailsArray[i+3],
-                        sqlCS,
+                        sqlDOB,sqlCS,
 
                         new ClsIAddress(
                                 DetailsArray[i + 4], DetailsArray[i + 5],
@@ -177,6 +170,16 @@ public class ClsCustomerList {
         } catch (IOException ioe1) {
             System.out.println("IO Problem: " + ioe1);
         }
+    }
+    
+    public ClsCustomer matchCustomer(String firstName, String surname){
+        for (int i=0; i<theClients.size();i++){
+            if(theClients.get(i).getCustomerDetails()[0].equals(firstName) && 
+                    theClients.get(i).getCustomerDetails()[1].equals(surname)){
+                return theClients.get(i);
+            }
+        }
+        return null;
     }
     
     public boolean findCustomer(JTextArea src, ClsCustomer aCustomer) {

@@ -100,15 +100,15 @@ public class ClsCustomer {
     }
     
     public String[] getCustomerDetails(){
-        String[] CustomerDetails = new String[5];
+        String[] CustomerDetails = new String[4];
         CustomerDetails[0] = this.FirstName;
         CustomerDetails[1] = this.Surname;
         
         CustomerDetails[2] = this.DOB.toString();
-        System.out.println(CustomerDetails[2]);
+        //System.out.println(CustomerDetails[2]);
         
         CustomerDetails[3] = this.CustomerSince.toString();
-        System.out.println(CustomerDetails[3]);
+        //System.out.println(CustomerDetails[3]);
         return CustomerDetails;
     }
     

@@ -1198,13 +1198,12 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                                     .addComponent(jAccountBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                                     .addComponent(jBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addGap(329, 329, 329)
+                                .addGap(100, 100, 100)
+                                .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel5))))
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addGap(284, 284, 284)
-                                .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
                                 .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jDisplayClientInformationBtn)
@@ -1305,12 +1304,11 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                                     .addComponent(jSortCodeLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jBankNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(1, 1, 1)
-                        .addComponent(jSearchForClientBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jDisplayClientInformationBtn)
-                            .addComponent(jImportClientsfromFileBtn))
+                            .addComponent(jImportClientsfromFileBtn)
+                            .addComponent(jSearchForClientBtn))
                         .addGap(18, 18, 18)
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jExportClientstoFileBtn)
@@ -1710,11 +1708,13 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                             jOpenNewAccountBtn.setVisible(false);  
                             
                             jMainTabbedPanel.setSelectedIndex(1);
-                            
+                            jDisplayClientInformationBtn.setVisible(false);
+                            jExportClientstoFileBtn.setVisible(false);
                         }
                         else jStatusMessageLabel.setText("Cannot login, please check login and password.");
                         break;    
                 } 
+                importClients();
                 jStatusAnimationLabel.setText(jNameTextField.getText() + " " + jRoleComboBox.getSelectedItem().toString() + " is logged in.");
             } else jStatusMessageLabel.setText("Cannot login, the user cannot be found, please register.");
         } else jStatusMessageLabel.setText("Please input valid username, password and role.");    
@@ -1991,8 +1991,13 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                     } else jAccountsTextArea.setText("Account not found.");
                 } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
             } else jStatusMessageLabel.setText("The customer has no accounts associated.");
-        } else jStatusMessageLabel.setText("Please, fill out all customer details and search for a customer first.");
-        
+        } 
+        else{
+            if (theUser.getRole().equals("Customer")){
+                jStatusMessageLabel.setText("Please, fill out all your details first.");
+            }
+            else jStatusMessageLabel.setText("Please, fill out all customer details and search for a customer first.");
+        }
     }//GEN-LAST:event_jSummarySelectedAccBtnActionPerformed
     //done
     private void jSearchForClientBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSearchForClientBtnActionPerformed
@@ -2039,45 +2044,20 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                 jClientsTextArea.setText("");
                 
                 if(bankClients.findCustomer(jClientsTextArea, theCustomer)){
-                    theCustomer.createAccountList();
-                    //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
-                    //client_FNSUR_CAs.txt, client_FNSUR_ISAs.txt, client_FNSUR_SAs.txt
-                    theCustomer.loadCAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", theCustomer);
-                    
-                    AccountListModel.clear();
-                    //System.out.println(AccountListModel.getSize());
-                    theCustomer.populateJListFromArrayList(AccountListModel);
-                    
-                    theCustomer.loadISAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", theCustomer);
-                    theCustomer.populateJListFromArrayList(AccountListModel);
-                    
-                    theCustomer.loadSAsFromFile("client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", theCustomer);
-                    theCustomer.populateJListFromArrayList(AccountListModel);
-                    jClientsTextArea.setText("Customer found and selected.");
-                } else jClientsTextArea.setText("Customer not found.");
+                        loadAcounts();
+                    jStatusMessageLabel.setText("Customer found and selected.");
+                } else jStatusMessageLabel.setText("Customer not found.");
             } else jStatusMessageLabel.setText("DOB field has incorrect format. Please input DD/MM/YYYY.");
         } else jStatusMessageLabel.setText("Please, specify all customer details.");
     }//GEN-LAST:event_jSearchForClientBtnActionPerformed
     //fix new
     private void jImportClientsfromFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jImportClientsfromFileBtnActionPerformed
-        String role = theUser.getRole();
-        try {
-            if (role.equals("Manager") || role.equals("Advisor") || role.equals("Administrator")) {
-                bankClients.loadFromFile("customers.txt", 1);
-                // Import customers file only
-            } else if (role.equals("Customer")) {
-                bankClients.loadFromFile("Clients_" + jNameTextField.getText() + jPasswordField.getText() + ".txt", 0);
-            }
-            else{
-                jStatusAnimationLabel.setText("Can't load customers' file.");
-            }
-        } catch (ParseException ex) {
-            Logger.getLogger(BankingGUIFrame.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        importClients();
     }//GEN-LAST:event_jImportClientsfromFileBtnActionPerformed
     //done
     private void jExportClientstoFileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jExportClientstoFileBtnActionPerformed
         bankClients.saveToFile();
+        jStatusMessageLabel.setText("Exported.");
         //theCustomer.saveToFile(jAccountTypeComboBox.getSelectedItem().toString());
     }//GEN-LAST:event_jExportClientstoFileBtnActionPerformed
     //done
@@ -2222,6 +2202,61 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         else jStatusMessageLabel.setText("Please, fill out all fields.");
     }//GEN-LAST:event_jWithdrawBtnActionPerformed
     
+    private void importClients(){       
+        String role = theUser.getRole();
+        try {
+            if (role.equals("Manager") || role.equals("Advisor") || role.equals("Administrator")) {
+                bankClients.loadFromFile("customers.txt", 1);
+                // Import customers file only  
+            } 
+            
+            else if (role.equals("Customer")) {
+                bankClients.loadFromFile("customers.txt", 1);
+                jImportClientsfromFileBtn.setText("Load my file.");
+                String firstName = jClientFirstNameTextField.getText();
+                String surname = jClientSurnameTextField.getText();
+            
+                if (!(firstName.equals("") || surname.equals(""))) {
+                    System.out.println("here1.");
+
+                    if ((bankClients.matchCustomer(firstName, surname)) != null) {
+                        theCustomer = bankClients.matchCustomer(firstName, surname);
+                        jClientsTextArea.setText(null);
+                        theCustomer.displayCustomerDetails(jClientsTextArea);
+                        theCustomer.displayCustomerAddress(jClientsTextArea);
+                        
+                        loadAcounts();
+                        
+                    } else {
+                        jStatusAnimationLabel.setText("Can't load your file, please try again.");
+                    }
+                }
+                jStatusAnimationLabel.setText("Please fill in your first name and surname.");
+            } 
+            else {
+                jStatusAnimationLabel.setText("Can't load customers' file.");
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(BankingGUIFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void loadAcounts() {
+        theCustomer.createAccountList();
+        //Filename has format of: "Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt"
+        //client_FNSUR_CAs.txt, client_FNSUR_ISAs.txt, client_FNSUR_SAs.txt
+        theCustomer.loadCAsFromFile("client_" + theCustomer.getCustomerDetails()[0] + theCustomer.getCustomerDetails()[1] + "_CAs.txt", theCustomer);
+
+        AccountListModel.clear();
+        //System.out.println(AccountListModel.getSize());
+        theCustomer.populateJListFromArrayList(AccountListModel);
+
+        theCustomer.loadISAsFromFile("client_" + theCustomer.getCustomerDetails()[0] + theCustomer.getCustomerDetails()[1] + "_ISAs.txt", theCustomer);
+        theCustomer.populateJListFromArrayList(AccountListModel);
+
+        theCustomer.loadSAsFromFile("client_" + theCustomer.getCustomerDetails()[0] + theCustomer.getCustomerDetails()[1] + "_SAs.txt", theCustomer);
+        theCustomer.populateJListFromArrayList(AccountListModel);
+    }
     /**
      * @param args the command line arguments
      */
