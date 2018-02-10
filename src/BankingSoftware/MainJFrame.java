@@ -1538,7 +1538,7 @@ public class MainJFrame extends javax.swing.JFrame {
     //done
     private void jDisplayPersonDetailsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayPersonDetailsButtonActionPerformed
         jHeadOfficeTextArea.setText("");
-        thePerson.DisplayPersonDetails(jHeadOfficeTextArea);
+        thePerson.displayPersonDetails(jHeadOfficeTextArea);
     }//GEN-LAST:event_jDisplayPersonDetailsButtonActionPerformed
     //done
     private void jDisplayPersonAddressButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDisplayPersonAddressButtonActionPerformed
@@ -1678,8 +1678,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         jMainTabbedPanel.addTab("Clients", jTabInMemory_5);
                         jMainTabbedPanel.addTab("Transactions", jTabInMemory_6);
                         jMainTabbedPanel.setSelectedIndex(1);
-                        
-                        
+
                         break;
                         
                     case "Advisor":
@@ -1754,6 +1753,7 @@ public class MainJFrame extends javax.swing.JFrame {
         {
                 theHeadOfficeBranch = new ClsBranch(headOfficeName, houseName, houseNo, street, area, postCode, town, country, sortCode, workingHours);
                 theHeadOfficeBranch.saveToFile();
+                jStatusMessageLabel.setText("Branch added.");
         }
         else jStatusMessageLabel.setText("Please, input values first.");
     }//GEN-LAST:event_jSaveOfficeDetailsButtonActionPerformed

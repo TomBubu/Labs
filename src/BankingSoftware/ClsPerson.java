@@ -14,7 +14,7 @@ import javax.swing.JTextArea;
  * @author ee16ttz
  */
 public class ClsPerson {
-    private ClsIAddress PersonAddress;
+    private ClsIAddress personAddress;
     //private clsCustomerList TheCustomer;
     /*
         Customer IS A Person!
@@ -33,7 +33,7 @@ public class ClsPerson {
 
     // Default constructor
     public ClsPerson(){
-        PersonAddress = new ClsIAddress();
+        personAddress = new ClsIAddress();
         firstName = " ";
         surname = " ";
         DOB = new Date(01/01/1900);
@@ -45,10 +45,10 @@ public class ClsPerson {
     }
     
     public void displayPersonAddress(JTextArea src){
-        PersonAddress.display(src, 0);
+        personAddress.display(src, 0);
     }
     
-    public void DisplayPersonDetails(JTextArea src){
+    public void displayPersonDetails(JTextArea src){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         src.setText(
                 "First name: "      + this.firstName        + "\n"  +
@@ -68,7 +68,7 @@ public class ClsPerson {
     public void editPersonAddress(String name, String houseName, Integer houseNo,
             String street, String area, String postcode, String town, String country)
     {
-        PersonAddress.edit(name, houseName, houseNo, street, area, postcode, town, country);
+        personAddress.edit(name, houseName, houseNo, street, area, postcode, town, country);
     }
  
 }

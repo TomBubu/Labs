@@ -40,8 +40,8 @@ public class ClsIAddress {
     /*####################################### Methods ##########################################*/
     /*##########################################################################################*/
     public void display(JTextArea src, int param){
-        //can we introduce a param that will display branch if param==1, else it wont?
-        //I will pass param 1 only in branch case, else I will pass 0 to this function.
+        // can we introduce a param that will display branch if param==1, else it wont?
+        // I will pass param 1 only in branch case, else I will pass 0 to this function.
         if(param == 1){
             src.append( "Branch Name: "  +   this.branchName  +   "\n" );
         }
