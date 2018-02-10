@@ -1635,7 +1635,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         // Display the result in the output field
         jOutputField.setText(String.valueOf(format));
     }//GEN-LAST:event_jButtonPlusActionPerformed
-    //fix
+    //done
     private void jLoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLoginButtonActionPerformed
         if ( theUser.areLoginInputsCorrect( jRoleComboBox, jNameTextField.getText(), jPasswordField.getText()) ) {
             if ( theUser.isUser(jNameTextField.getText(), jPasswordField.getText(), jRoleComboBox.getSelectedItem().toString() ) ) {
@@ -1848,7 +1848,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
             jStatusMessageLabel.setText("Subdepartment added.");
         } else jStatusAnimationLabel.setText("Please input values first.");
     }//GEN-LAST:event_jAddSubdepartmentActionPerformed
-    //fix
+    //done
     private void jLogOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLogOutButtonActionPerformed
         int indexToRemove = 0;
         if (theUser.getRole().equals("Administrator")) {
