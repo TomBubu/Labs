@@ -1198,9 +1198,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                                     .addComponent(jAccountBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                                     .addComponent(jBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addGroup(jClientsPanelLayout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(350, 350, 350)
                                 .addComponent(jLabel5))))
                     .addGroup(jClientsPanelLayout.createSequentialGroup()
                         .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -1213,7 +1211,9 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                                     .addComponent(jExportClientstoFileBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jImportClientsfromFileBtn))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jOpenNewAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jClientsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jOpenNewAccountBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jSearchForClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jClientsPanelLayout.createSequentialGroup()
                                 .addComponent(jRemoveClientBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1480,7 +1480,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         );
         jMainPanelLayout.setVerticalGroup(
             jMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jMainPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jMainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jMainTabbedPanel))
         );
@@ -2217,7 +2217,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                 String surname = jClientSurnameTextField.getText();
             
                 if (!(firstName.equals("") || surname.equals(""))) {
-                    System.out.println("here1.");
+                    //System.out.println("here1.");
 
                     if ((bankClients.matchCustomer(firstName, surname)) != null) {
                         theCustomer = bankClients.matchCustomer(firstName, surname);
