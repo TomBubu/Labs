@@ -7,6 +7,7 @@ package BankingSoftware;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
@@ -20,10 +21,12 @@ public class ClsCurrentAccount extends ClsAccount{
     private double availableBalance;
     private double overdraftLimit;
     private double fee;
+    private ClsTransactionList transactionsList;
     
     public ClsCurrentAccount(){
         //create();
         super();
+        transactionsList = new ClsTransactionList();
         create(" ", 0.00, 100.00, 25.00);
     }
        
@@ -35,11 +38,19 @@ public class ClsCurrentAccount extends ClsAccount{
         create(conditions, availableBalance, overdraftLimit, fee);
     }
     
-    
     public void display(){
         
     }
     
+    private Date makeDate(){
+        // Create the date for transactions
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        // Testing
+        System.out.println(sqlDate);
+        
+        return sqlDate;
+    }
     
     public void create(String conditions, double availableBalance, double overdraftLimit, double fee){
         this.conditions = conditions;
@@ -60,6 +71,7 @@ public class ClsCurrentAccount extends ClsAccount{
     public void depositMonthlyInterest(){
         // fix
         transactions++;
+        //transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
     }
  
     @Override
@@ -67,16 +79,23 @@ public class ClsCurrentAccount extends ClsAccount{
         // fix 
     }
  
-    @Override
-    public boolean deposit(double amount){  
+        @Override
+    public boolean deposit(double amount) {
         boolean depositSuccessful = false;
-        if(amount > 0){
+        if (amount > 0) {
             //super.transactions.addTransaction;
             this.balance = this.balance + amount;
             transactions++;
+
+            ClsTransaction transaction = new ClsTransaction(makeDate(), amount, this, this, this.balance);
+
+            //it  "works" with this but not without it! Why?
+            //  creates new list every time
+            // transactionsList = new ClsTransactionList();
+            transactionsList.add(transaction);
+
             depositSuccessful = true;
-        }
-        else{
+        } else {
             depositSuccessful = false;
         }
         return depositSuccessful;
@@ -92,11 +111,13 @@ public class ClsCurrentAccount extends ClsAccount{
             //endMonthUtil();
             //super.transactions.addTransaction;
             transactions++;
+            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
             withdrawSuccessful = true;
         }
         else{
             this.balance = this.balance - amount;
             transactions++; 
+            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
             withdrawSuccessful = true;
         }
         return withdrawSuccessful;
@@ -107,9 +128,15 @@ public class ClsCurrentAccount extends ClsAccount{
         long days = transactionDate.getTime() - openingDate.getTime();
         if(days >= 31){
             balance *= rate;
+            
+            // possible error
+            double amount = this.balance - (balance*=rate);
+            
             transactions++;
+            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
             endOfMonthSummary(src);
         }
     }
+
 
 }

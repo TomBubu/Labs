@@ -28,6 +28,7 @@ public class ClsCustomer {
     //private ClsAccount CustomerAccount; // used previously in lab 6 or 7
     // ArrayList of object instances of class Account
     private ArrayList<ClsAccount> ownedAccounts;
+    private ClsTransactionList transactions;
         
     private String FirstName;
     private String Surname;

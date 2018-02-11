@@ -26,9 +26,9 @@ public class ClsCustomerList {
     public ClsCustomerList(){}
 
     public void display(JTextArea src) {
-        for (ClsCustomer Client : theClients) {
-                Client.displayCustomerDetails(src);
-                Client.getCustomerAddress().display(src, 0);
+        for (ClsCustomer client : theClients) {
+                client.displayCustomerDetails(src);
+                client.getCustomerAddress().display(src, 0);
                 src.append("\n");
         }
     }

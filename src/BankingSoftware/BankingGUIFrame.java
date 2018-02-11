@@ -251,10 +251,10 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         jTransactionsAmountTextField = new javax.swing.JTextField();
         jApproveTransactionBtn = new javax.swing.JButton();
         jGenerateStatementBtn = new javax.swing.JButton();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTransactionTextPane = new javax.swing.JTextPane();
         jDepositBtn = new javax.swing.JButton();
         jWithdrawBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTransactionTextArea = new javax.swing.JTextArea();
         jMenuBarMain = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -1367,8 +1367,6 @@ public class BankingGUIFrame extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane6.setViewportView(jTransactionTextPane);
-
         jDepositBtn.setText("Deposit");
         jDepositBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1383,14 +1381,20 @@ public class BankingGUIFrame extends javax.swing.JFrame {
             }
         });
 
+        jTransactionTextArea.setColumns(20);
+        jTransactionTextArea.setRows(5);
+        jScrollPane2.setViewportView(jTransactionTextArea);
+
         javax.swing.GroupLayout jTransactionsPanelLayout = new javax.swing.GroupLayout(jTransactionsPanel);
         jTransactionsPanel.setLayout(jTransactionsPanelLayout);
         jTransactionsPanelLayout.setHorizontalGroup(
             jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jTransactionsPanelLayout.createSequentialGroup()
+            .addGroup(jTransactionsPanelLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane6)
+                .addGroup(jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jTransactionsPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addGap(393, 393, 393))
                     .addGroup(jTransactionsPanelLayout.createSequentialGroup()
                         .addGroup(jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTransactionsFirstNameLabel)
@@ -1417,8 +1421,8 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                             .addGroup(jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jWithdrawBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jDepositBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jGenerateStatementBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(366, 366, 366))
+                                .addComponent(jGenerateStatementBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(366, 366, 366))))
         );
         jTransactionsPanelLayout.setVerticalGroup(
             jTransactionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1463,9 +1467,9 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                                 .addComponent(jWithdrawBtn)
                                 .addGap(6, 6, 6))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(12, 12, 12)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jMainTabbedPanel.addTab("Transactions", jTransactionsPanel);
@@ -2302,6 +2306,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
     private ClsCustomerList bankClients; //used to print the details of account into the form using Customer objects
     private ClsBranchList bankBranches;
     private ClsUser theUser;
+    private ClsTransactionList bankTransactions;
     
     // Accounts
     private ClsCurrentAccount currentAcc;
@@ -2460,10 +2465,10 @@ public class BankingGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jRoleLabel;
     private javax.swing.JButton jSaveOfficeDetailsButton;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JButton jSearchForClientBtn;
     private javax.swing.JSeparator jSeparator1;
@@ -2475,7 +2480,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jStatusMessageLabel;
     private javax.swing.JPanel jStatusPanel;
     private javax.swing.JButton jSummarySelectedAccBtn;
-    private javax.swing.JTextPane jTransactionTextPane;
+    private javax.swing.JTextArea jTransactionTextArea;
     private javax.swing.JLabel jTransactionsAccNumberLabel;
     private javax.swing.JTextField jTransactionsAccNumberTextField;
     private javax.swing.JTextField jTransactionsAmountTextField;

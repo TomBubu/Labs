@@ -6,6 +6,7 @@
 package BankingSoftware;
 
 import java.util.ArrayList;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -13,8 +14,28 @@ import java.util.ArrayList;
  */
 public class ClsTransactionList {
     private ArrayList<ClsTransaction> transactions = new ArrayList<>();
-    private ClsAccount account;
+
     
+    ClsTransactionList(){}
     
+    public void display(JTextArea src){
+        for (ClsTransaction transaction : transactions) {
+                src.setText("");
+                transaction.display(src);
+                src.append("\n\n");
+        }
+    }
     
+    public void add(ClsTransaction newTransaction){
+        transactions.add(newTransaction);
+        System.out.println(transactions.size());
+    }
+    
+    public boolean checkSize(){
+        if(this.transactions != null){
+            return true;
+        }
+        else return false;
+    }
 }
+
