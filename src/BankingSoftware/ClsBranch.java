@@ -120,8 +120,7 @@ public class ClsBranch {
     }
     
     public String branchDetailsOutput(){
-        String branchDetails = (this.sortCode + ", " + this.workingHours);
-        return branchDetails;
+        return (this.sortCode + ", " + this.workingHours);
     }
     
     /*
@@ -165,8 +164,7 @@ public class ClsBranch {
     }
     
     public String getBranchAddress(){
-        String branchAddress = theAddress.outputAddress();
-        return branchAddress;
+        return theAddress.outputAddress();
     }
     
 }

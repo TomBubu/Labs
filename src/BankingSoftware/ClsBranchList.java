@@ -60,12 +60,12 @@ public class ClsBranchList {
         BufferedWriter out = null;
         try {
             out = new BufferedWriter(new FileWriter("branches.txt"));
-            for (ClsBranch Branch : theBranches) {
+            for (ClsBranch branch : theBranches) {
                 out.write("[");
-                out.write(Branch.getBranchAddress());
+                out.write(branch.getBranchAddress());
                 //branchName+", "+houseName+", "+houseNo+", "+street+", "+area+", "+postCode+", "+town+", "+country;
                 out.write(", ");
-                out.write(Branch.outputBranchDetails());
+                out.write(branch.outputBranchDetails());
                 //sortCode +", "+ workingHours;
                 out.write("]");
                 out.write(System.getProperty("line.separator"));
@@ -134,10 +134,10 @@ public class ClsBranchList {
    
     public ClsBranch findBranch(String name) {
         ClsBranch theBranch = new ClsBranch();
-        for (ClsBranch Branch : SubDepartments.theBranches) {
-            if (Branch.getBranchName().matches(name)) {
+        for (ClsBranch branch : SubDepartments.theBranches) {
+            if (branch.getBranchName().matches(name)) {
                 //System.out.println(Branch.getBranchName());
-                theBranch = Branch;
+                theBranch = branch;
                 //System.out.println(Branch.outputBranchDetails());
               }
         }
