@@ -33,7 +33,7 @@ public class ClsBranchList {
             Branch.displayBranchAddress(src); 
             Branch.displayBranchDetails(src);
         }
-        System.out.println( theBranches.size() );
+        //System.out.println( theBranches.size() );
     }
     
     public boolean addBranch(ClsBranch newBranch){
