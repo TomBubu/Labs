@@ -1924,10 +1924,9 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                         theCustomer.createAccountList();
                         theCustomer.createAccount(currentAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
-                        
-                        jStatusMessageLabel.setText("Account created.");
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_CAs.txt", currentAcc);
+                        jStatusMessageLabel.setText("Account created.");
                         break;
 
                     case "ISA Account":
@@ -1937,10 +1936,9 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                         theCustomer.createAccountList();
                         theCustomer.createAccount(ISAAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
-                        
-                        jStatusMessageLabel.setText("Account created.");
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_ISAs.txt", ISAAcc);
+                        jStatusMessageLabel.setText("Account created.");
                         break;
 
                     case "Saving Account":
@@ -1951,9 +1949,9 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                         theCustomer.createAccountList();
                         theCustomer.createAccount(savingsAcc);
                         theCustomer.populateJListFromArrayList(AccountListModel);
-                        
                         bankBranches.removeLineFromFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", "EmptyLine");
                         theCustomer.saveToClientFile("Client_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+"_SAs.txt", savingsAcc);
+                        jStatusMessageLabel.setText("Account created.");
                         break;
                     default: jStatusMessageLabel.setText("Something went wrong, can't create an account.");
                 }
