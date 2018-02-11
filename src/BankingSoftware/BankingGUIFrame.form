@@ -1897,9 +1897,11 @@
                                           <Component id="jTransactionsAmountTextField" min="-2" pref="85" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="jApproveTransactionBtn" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jGenerateStatementBtn" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jDepositBtn" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jWithdrawBtn" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jWithdrawBtn" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jDepositBtn" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jGenerateStatementBtn" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -1947,9 +1949,9 @@
                                               <Component id="jTransactionsAmountTextField" alignment="3" min="-2" max="-2" attributes="0"/>
                                               <Component id="jTransactionsDepositAmountLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                                           <Component id="jApproveTransactionBtn" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jGenerateStatementBtn" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                           <Component id="jDepositBtn" min="-2" max="-2" attributes="0"/>
