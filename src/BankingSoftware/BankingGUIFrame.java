@@ -2174,6 +2174,8 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         String sortCode = jSortCodeTextField.getText();
         int accNo = Integer.parseInt(jTransactionsAccNumberTextField.getText());
         
+        
+        
         if(!(amount == 0 || firstName == "" || surname == "" || DOB == "" || accNo == 0 || sortCode == "") && theCustomer != null){
             
             theCustomer.returnSpecificAcc(sortCode, accNo).deposit(amount);

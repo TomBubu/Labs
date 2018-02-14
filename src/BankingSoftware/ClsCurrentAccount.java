@@ -80,7 +80,6 @@ public class ClsCurrentAccount extends ClsAccount{
  
     @Override
     public boolean deposit(double amount) {
-        boolean depositSuccessful = false;
         if (amount > 0) {
             //super.transactions.addTransaction;
             this.balance = this.balance + amount;
@@ -94,21 +93,21 @@ public class ClsCurrentAccount extends ClsAccount{
             
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
+                transactionsList.add(transaction);
+                return true;
             }
             else {
                 transactionsList.add(transaction);
-                depositSuccessful = true;
+                return true;
             }
 
         } else {
-            depositSuccessful = false;
+            return false;
         }
-        return depositSuccessful;
     }
     
     @Override
     public boolean withdraw(double amount) {
-        boolean withdrawSuccessful = false;
         // Gives error: abstract method withdraw(double) in ClsAccount cannot be accessed directly 
         //super.withdraw(value);
         
@@ -117,20 +116,24 @@ public class ClsCurrentAccount extends ClsAccount{
         // < - 100
         // makes stacoverflow error
         if((this.balance - amount) < ((this.overdraftLimit)*(-1)) ) {
-            withdraw(this.fee);
+            
+            //100 - 300 = -200  < -100
+            //withdraw(this.fee); // will result in cyclic error
+            this.balance = (this.balance - amount) - this.fee;
+            
             //endMonthUtil();
             //super.transactions.addTransaction;
             transactions++;
             transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
-            withdrawSuccessful = true;
+            return true;
+            
         }
         else{
             this.balance = this.balance - amount;
             transactions++; 
             transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
-            withdrawSuccessful = true;
+            return true;
         }
-        return withdrawSuccessful;
     }
     
     @Override
