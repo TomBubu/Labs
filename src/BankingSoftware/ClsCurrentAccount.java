@@ -110,23 +110,17 @@ public class ClsCurrentAccount extends ClsAccount{
     public boolean withdraw(double amount) {
         // Gives error: abstract method withdraw(double) in ClsAccount cannot be accessed directly 
         //super.withdraw(value);
-        
-        // balance = 0  
-        // amount = 50 
-        // < - 100
-        // makes stacoverflow error
+
         if((this.balance - amount) < ((this.overdraftLimit)*(-1)) ) {
             
-            //100 - 300 = -200  < -100
-            //withdraw(this.fee); // will result in cyclic error
+            // 100 - 300 = -200  < -100
+            //withdraw(this.fee); // will result in cyclic error, stacoverflow error
             this.balance = (this.balance - amount) - this.fee;
             
             //endMonthUtil();
-            //super.transactions.addTransaction;
             transactions++;
             transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
             return true;
-            
         }
         else{
             this.balance = this.balance - amount;
