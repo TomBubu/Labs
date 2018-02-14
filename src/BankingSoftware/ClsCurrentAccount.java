@@ -42,7 +42,7 @@ public class ClsCurrentAccount extends ClsAccount{
     }
     
     private Date makeDate(){
-        // Create the date for transactions
+        // Create today's date for transactions
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         // Testing
@@ -81,16 +81,10 @@ public class ClsCurrentAccount extends ClsAccount{
     @Override
     public boolean deposit(double amount) {
         if (amount > 0) {
-            //super.transactions.addTransaction;
             this.balance = this.balance + amount;
             transactions++;
 
             ClsTransaction transaction = new ClsTransaction(makeDate(), "In", amount, this, this, this.balance);
-
-            //it  "works" with this but not without it! Why?
-            // creates new list every time
-            // transactionsList = new ClsTransactionList();
-            
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
                 transactionsList.add(transaction);
@@ -112,11 +106,11 @@ public class ClsCurrentAccount extends ClsAccount{
         //super.withdraw(value);
 
         if((this.balance - amount) < ((this.overdraftLimit)*(-1)) ) {
-            
+
             // 100 - 300 = -200  < -100
             //withdraw(this.fee); // will result in cyclic error, stacoverflow error
             this.balance = (this.balance - amount) - this.fee;
-            
+
             //endMonthUtil();
             transactions++;
             transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
