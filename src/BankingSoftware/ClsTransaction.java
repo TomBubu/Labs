@@ -5,8 +5,12 @@
  */
 package BankingSoftware;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 
 /**
@@ -51,5 +55,20 @@ public class ClsTransaction {
                         + "\t Receiver: \n" + this.receiver.outputDetails() + " \n " 
                         + "\t Sender: \n" + this.sender.outputDetails() + " \n "
         );
+    }
+    
+    private String output(){
+        return (this.date + ", " + this.type + ", " + this.amount + ", " + this.balance + ", " + this.receiver.outputToFile() + ", " + this.sender.outputToFile());
+    }
+    
+    public void saveToFile(BufferedWriter bw){
+        try {
+            bw.write(this.output());
+            bw.write(System.getProperty("line.separator"));
+            bw.write("EmptyLine");
+            // System.gc();
+        } catch (IOException ex) {
+            Logger.getLogger(ClsTransaction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

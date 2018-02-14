@@ -58,6 +58,7 @@ public class ClsCurrentAccount extends ClsAccount{
     }  
 
     @Override
+    // Used when creating new accounts and saving them to the client account files
     public void saveToFile(BufferedWriter bw){
         try {
             bw.write(super.outputToFile() +", "+ this.conditions+", "+this.availableBalance+", "+this.overdraftLimit+", "+this.fee);
@@ -66,11 +67,23 @@ public class ClsCurrentAccount extends ClsAccount{
         }
     }
     
+    // This method is called when a new transaction has been made (deposit or withdraw).
+    private void saveToTransactionFile(ClsTransaction transaction){
+        transactionsList.removeLineFromFile("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt", "EmptyLine");
+        System.out.println("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt\n");
+        System.out.println("Empty Line removed.\n");
+        transactionsList.saveToFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], transaction);
+        // Testing
+        System.out.println("Output successful.\n");
+        System.gc();
+    }
+    
     public void depositMonthlyInterest(){
         // fix
         transactions++;
         //double amount = monthlyInterest stuff
         //transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
+        //this.saveToTransactionFile();
     }
  
     @Override
@@ -80,6 +93,7 @@ public class ClsCurrentAccount extends ClsAccount{
  
     @Override
     public boolean deposit(double amount) {
+        boolean success = false;
         if (amount > 0) {
             this.balance = this.balance + amount;
             transactions++;
@@ -88,16 +102,19 @@ public class ClsCurrentAccount extends ClsAccount{
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
                 transactionsList.add(transaction);
-                return true;
+                success = true;
             }
             else {
                 transactionsList.add(transaction);
-                return true;
+                success =  true;
             }
+            
+            this.saveToTransactionFile(transaction);
 
         } else {
-            return false;
+            success = false;
         }
+        return success;
     }
     
     @Override
@@ -113,13 +130,17 @@ public class ClsCurrentAccount extends ClsAccount{
 
             //endMonthUtil();
             transactions++;
-            transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
+            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            transactionsList.add(transaction);
+            this.saveToTransactionFile(transaction);
             return true;
         }
         else{
             this.balance = this.balance - amount;
             transactions++; 
-            transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
+            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            transactionsList.add(transaction);
+            this.saveToTransactionFile(transaction);
             return true;
         }
     }
@@ -136,10 +157,13 @@ public class ClsCurrentAccount extends ClsAccount{
             double amount = this.balance * super.rate;
             
             transactions++;
-            transactionsList.add(new ClsTransaction(makeDate(), "In", amount, this, this, this.balance));
+            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            transactionsList.add(transaction);
             endOfMonthSummary(src);
+            this.saveToTransactionFile(transaction);
+            
         }
     }
-
+    
 
 }

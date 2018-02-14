@@ -28,7 +28,7 @@ public abstract class ClsAccount {
     
     private boolean joint;
     private Date lastReportedDate;
-    private ClsCustomer accountHolder;
+    protected ClsCustomer accountHolder;
     
     
     public ClsAccount() {

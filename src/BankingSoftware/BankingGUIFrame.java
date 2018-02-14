@@ -2179,6 +2179,8 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         if(!(amount == 0 || firstName == "" || surname == "" || DOB == "" || accNo == 0 || sortCode == "") && theCustomer != null){
             
             theCustomer.returnSpecificAcc(sortCode, accNo).deposit(amount);
+            //theCustomer.returnSpecificAcc(sortCode, accNo).saveToTransactionFile(); // Found at line 71 in ClsCurrentAccount
+            
             
             // Testing:
             //System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);

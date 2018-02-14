@@ -200,7 +200,6 @@ public class ClsBranchList {
         try {
             writer = new BufferedWriter(new FileWriter(filename, true));
             aSubBranch.saveToSubDepartmentsFile(writer);
-            
             writer.newLine();
             writer.close();
         } catch (IOException ioe1) {
