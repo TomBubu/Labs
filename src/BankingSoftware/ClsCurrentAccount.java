@@ -48,12 +48,26 @@ public class ClsCurrentAccount extends ClsAccount{
     // Used when creating new accounts and saving them to the client account files
     public void saveToFile(BufferedWriter bw){
         try {
-            bw.write(super.outputToFile() +", "+ this.conditions+", "+this.availableBalance+", "+this.overdraftLimit+", "+this.fee);
+            bw.write(super.outputToFile() +", "+ this.output());
         } catch (IOException ex) {
             Logger.getLogger(ClsISAAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+    private String output(){
+        return this.conditions+", "+this.availableBalance+", "+this.overdraftLimit+", "+this.fee;
+    }
+    
+    public String outputTransactions(){
+        return (super.outputToFile() +", "+ this.output());
+    }
+    
+    /*
+    public ClsCurrentAccount unimportantMethod(){
+        return this;
+    }
+    */
+        
     // This method is called when a new transaction has been made (deposit or withdraw).
     private void saveToTransactionFile(ClsTransaction transaction){
         transactionsList.removeLineFromFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], "EmptyLine", transaction);
@@ -85,7 +99,9 @@ public class ClsCurrentAccount extends ClsAccount{
             this.balance = this.balance + amount;
             transactions++;
 
-            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, this, this.balance);
+            //ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount,  new ClsCurrentAccount(), this.balance);
+            
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
                 transactionsList.add(transaction);
@@ -117,7 +133,9 @@ public class ClsCurrentAccount extends ClsAccount{
 
             //endMonthUtil();
             transactions++;
-            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            //ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, new ClsCurrentAccount(), this.balance);
+            
             transactionsList.add(transaction);
             this.saveToTransactionFile(transaction);
             return true;
@@ -125,7 +143,9 @@ public class ClsCurrentAccount extends ClsAccount{
         else{
             this.balance = this.balance - amount;
             transactions++; 
-            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            //ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount,  new ClsCurrentAccount(), this.balance);
+            
             transactionsList.add(transaction);
             this.saveToTransactionFile(transaction);
             return true;
@@ -144,7 +164,9 @@ public class ClsCurrentAccount extends ClsAccount{
             double amount = this.balance * super.rate;
             
             transactions++;
-            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            //ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount,  new ClsCurrentAccount(), this.balance);
+            
             transactionsList.add(transaction);
             endOfMonthSummary(src);
             this.saveToTransactionFile(transaction);

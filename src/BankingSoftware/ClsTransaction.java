@@ -23,24 +23,24 @@ public class ClsTransaction {
     private String type;
     private double amount;
     //private String reference;
-    private ClsAccount receiver;
-    private ClsAccount sender;
+    //private ClsAccount receiver;
+    private ClsCurrentAccount sender;
     private double balance;
     
     public ClsTransaction(){
-        create(new Date(01/01/1900), " ", 0.0d, new ClsCurrentAccount(), new ClsCurrentAccount(), 0.0d );
+        create(new Date(01/01/1900), " ", 0.0d, /*new ClsCurrentAccount(),*/ new ClsCurrentAccount(), 0.0d );
     }
     
-    public ClsTransaction(Date date, String type, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
-        create(date, type, amount,/* reference,*/ receiver, sender, balance);
+    public ClsTransaction(Date date, String type, double amount,/* String reference, ClsAccount receiver,*/ ClsCurrentAccount sender, double balance){
+        create(date, type, amount,/* reference, receiver,*/ sender, balance);
     }
     
-    public void create(Date date, String type, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
+    public void create(Date date, String type, double amount,/* String reference, ClsAccount receiver,*/ ClsCurrentAccount sender, double balance){
         this.date = date;
         this.type = type;
         this.amount = amount;
         //this.reference = reference;
-        this.receiver = receiver;
+        //this.receiver = receiver;
         this.sender = sender;
         this.balance = balance;
     }
@@ -52,13 +52,20 @@ public class ClsTransaction {
                         sdf.format(this.date) + " | " + "Type: " + this.type + " | " + "Amount: " + this.amount + " | " + "Balance: " + this.balance + " | \n"
                         //+ this.reference + " | "
                         // A client is receiver but they can have multiple accounts, so it is good to see which account it was received to.
-                        + "\t Receiver: \n" + this.receiver.outputDetails() + " \n " 
+                        //+ "\t Receiver: \n" + this.receiver.outputDetails() + " \n " 
                         + "\t Sender: \n" + this.sender.outputDetails() + " \n "
         );
     }
     
     private String output(){
-        return (this.date + ", " + this.type + ", " + this.amount + ", " + this.balance + ", " + this.receiver.outputToFile() + ", " + this.sender.outputToFile());
+        return 
+        (
+                // How am I supposed to save all attributes of ClsCurrentAccount for receiver when it is of Absract class into a file
+                // so I can create object receiver in it? :?
+                this.date + ", " + this.type + ", " + this.amount + ", " + this.balance + ", " 
+                //+ this.receiver.outputToFile() + ", " + receiver.unimportantMethodX().outputTransactions()
+                + this.sender.outputTransactions()
+        );
     }
     
     public void saveToFile(BufferedWriter bw){
@@ -72,7 +79,11 @@ public class ClsTransaction {
         }
     }
     
+    
+    /*
     public String getAccType(){
         return this.receiver.type;
     }
+    */
+    
 }

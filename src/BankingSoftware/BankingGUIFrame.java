@@ -2163,7 +2163,34 @@ public class BankingGUIFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jDisplayClientInformationBtnActionPerformed
     //new
     private void jGenerateStatementBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGenerateStatementBtnActionPerformed
-        
+        double amount = Double.parseDouble(jTransactionsAmountTextField.getText());
+        String firstName = jTransactionsFirstNameTextField.getText();
+        String surname = jTransactionsSurnameTextField.getText();
+        String DOB = jTransactionsDOBTextField.getText();
+        String sortCode = jSortCodeTextField.getText();
+        int accNo = Integer.parseInt(jTransactionsAccNumberTextField.getText());
+           
+        if(!(amount == 0 || firstName == "" || surname == "" || DOB == "" || accNo == 0 || sortCode == "") && theCustomer != null ){
+            if(theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList != null){
+                
+                try {
+                    // load from files to transactionList
+                    //String filename, ClsCustomer aCustomer
+                    theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.loadFromFile(
+                        "transactions_"+theCustomer.getCustomerDetails()[0]+theCustomer.getCustomerDetails()[1]+".txt",
+                        theCustomer
+                     );
+                    
+                } catch (ParseException ex) {
+                    Logger.getLogger(BankingGUIFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            
+                // display the transactionList
+                theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.display(jTransactionTextArea);
+            }
+            else jStatusMessageLabel.setText("No transactions available.");
+        }
+        else jStatusMessageLabel.setText("Please, fill out all fields in the transaction first.");
     }//GEN-LAST:event_jGenerateStatementBtnActionPerformed
     //fix
     private void jDepositBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jDepositBtnActionPerformed

@@ -62,7 +62,9 @@ public class ClsSavingsAccount extends ClsAccount{
             balance += amount;
             transactions++;
             
-            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, new ClsCurrentAccount(), this.balance);
+            
+            //ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, new ClsCurrentAccount(), this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, new ClsCurrentAccount(), this.balance);
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
                 transactionsList.add(transaction);

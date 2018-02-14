@@ -12,7 +12,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 import javax.swing.JTextArea;
 
 /**
@@ -49,6 +53,7 @@ public class ClsTransactionList {
     public void saveToFile(String name, ClsTransaction transaction){
         BufferedWriter out = null;
         String filename = "";
+        /*
         switch (transaction.getAccType()) {
             case "Current Account":
                 filename = ("transactions_" + name + "_CA.txt");
@@ -62,6 +67,8 @@ public class ClsTransactionList {
             default:
                 filename = null;
         }
+        */
+        filename = ("transactions_" + name + ".txt");
         
         try {
             out = new BufferedWriter (new FileWriter(filename, true));
@@ -71,11 +78,13 @@ public class ClsTransactionList {
         } catch (IOException ioe1) { System.out.println("IO Problem: " + ioe1); }
     }
     
+    
     public void removeLineFromFile(String name, String lineToRemove, ClsTransaction transaction) {
         BufferedReader br;
         PrintWriter pw = null;
         String filename;
         
+        /*
         switch (transaction.getAccType()) {
             case "Current Account":
                 filename = ("transactions_" + name + "_CA.txt");
@@ -89,6 +98,8 @@ public class ClsTransactionList {
             default:
                 filename = null;
         }
+        */
+        filename = ("transactions_" + name + ".txt");
         
         try {
             File inFile = new File(filename);
@@ -129,8 +140,63 @@ public class ClsTransactionList {
         }
     }
     
-    public void loadFromFile(String filename){
-        
+    public void loadFromFile(String filename, ClsCustomer aCustomer) throws ParseException {
+        ArrayList<String> words = new ArrayList<>();
+        try {
+            Scanner in = new Scanner(new File(filename));
+            while (in.hasNextLine()) {
+                String line = in.nextLine();
+                for (String word : line.split(", ")) { 
+                    //if I do ",\n" then 1 customer per line //if ", " then 1 customer, 4 lines
+                    words.add(word);
+                }
+            }
+            String[] DetailsArray =  words.toArray(new String[words.size()]);
+            transactions.clear();
+            
+            //I need to increment i by 4 each time, because one client is made of 4 entries
+            for (int i = 0; i < words.size() - 19; i += 19) {
+
+                
+                // Define format
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                // Get strings, which will be dates
+                String strDate = DetailsArray[i];
+                // Parse strings to java.util.Date
+                Date date = sdf.parse(strDate);
+                // Convert java.util.Date to sql.Date. This strips the time part off
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                             
+                
+                ClsCurrentAccount sender = new ClsCurrentAccount(
+                        DetailsArray[i],
+                        DetailsArray[i+1], //sort code         2
+                        Integer.parseInt(DetailsArray[i + 2]), //accountNo         3
+                        Double.parseDouble(DetailsArray[i +3]), //balance           4
+                        DetailsArray[i + 4], //nameOfBank        5
+                        Double.parseDouble(DetailsArray[i + 5]), //rate              6
+                        Integer.parseInt(DetailsArray[i + 6]), //transactions      7 
+                        aCustomer, //ClsCustomer accountHolder     8
+                        DetailsArray[i + 7], //conditions        9
+                        Double.parseDouble(DetailsArray[i + 8]), //availableBalance  10
+                        Double.parseDouble(DetailsArray[i + 9]), //overdraftLimit    11
+                        Double.parseDouble(DetailsArray[i + 10]) //fee
+                );
+                                        
+           
+                
+                ClsTransaction newTransaction = new ClsTransaction(
+                        sqlDate,                                    // date
+                        DetailsArray[i+1],                          // type
+                        Double.parseDouble(DetailsArray[i+2]),      // amount
+                        sender,                                     // cls ?? Account sender
+                        Double.parseDouble(DetailsArray[i+3])      // balance  
+                );
+                transactions.add(newTransaction);
+            }
+        } catch (IOException ioe1) {
+            System.out.println("IO Problem: " + ioe1);
+        }
     }
 }
 

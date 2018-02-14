@@ -150,8 +150,8 @@ public class ClsCustomerList {
                 java.sql.Date sqlCS = new java.sql.Date(customerSince.getTime());
                 
                 // Format the sql.Dates
-                String noTimeDOB = sdf.format(sqlDOB);
-                String noTimeSC = sdf.format(sqlCS);
+                //String noTimeDOB = sdf.format(sqlDOB);
+                //String noTimeSC = sdf.format(sqlCS);
   
                 ClsCustomer newCustomer = new ClsCustomer(
                         DetailsArray[i].replace("[", ""), DetailsArray[i+1], 
