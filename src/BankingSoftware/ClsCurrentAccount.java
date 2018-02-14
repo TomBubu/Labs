@@ -37,19 +37,6 @@ public class ClsCurrentAccount extends ClsAccount{
         create(conditions, availableBalance, overdraftLimit, fee);
     }
     
-    public void display(){
-        
-    }
-    
-    private Date makeDate(){
-        // Create today's date for transactions
-        Date date = new Date();
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        // Testing
-        //System.out.println(sqlDate);
-        return sqlDate;
-    }
-    
     public void create(String conditions, double availableBalance, double overdraftLimit, double fee){
         this.conditions = conditions;
         this.availableBalance = availableBalance;
@@ -69,12 +56,12 @@ public class ClsCurrentAccount extends ClsAccount{
     
     // This method is called when a new transaction has been made (deposit or withdraw).
     private void saveToTransactionFile(ClsTransaction transaction){
-        transactionsList.removeLineFromFile("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt", "EmptyLine");
-        System.out.println("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt\n");
-        System.out.println("Empty Line removed.\n");
+        transactionsList.removeLineFromFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], "EmptyLine", transaction);
+        //System.out.println("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt\n");
+        //System.out.println("Empty Line removed.\n");
         transactionsList.saveToFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], transaction);
         // Testing
-        System.out.println("Output successful.\n");
+        //System.out.println("Output successful.\n");
         System.gc();
     }
     
@@ -82,7 +69,7 @@ public class ClsCurrentAccount extends ClsAccount{
         // fix
         transactions++;
         //double amount = monthlyInterest stuff
-        //transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
+        //transactionsList.add(new ClsTransaction(super.makeDate(), amount, this, this, this.balance));
         //this.saveToTransactionFile();
     }
  
@@ -98,7 +85,7 @@ public class ClsCurrentAccount extends ClsAccount{
             this.balance = this.balance + amount;
             transactions++;
 
-            ClsTransaction transaction = new ClsTransaction(makeDate(), "In", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, this, this.balance);
             if (transactionsList == null){
                 transactionsList = new ClsTransactionList();
                 transactionsList.add(transaction);
@@ -130,7 +117,7 @@ public class ClsCurrentAccount extends ClsAccount{
 
             //endMonthUtil();
             transactions++;
-            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
             transactionsList.add(transaction);
             this.saveToTransactionFile(transaction);
             return true;
@@ -138,7 +125,7 @@ public class ClsCurrentAccount extends ClsAccount{
         else{
             this.balance = this.balance - amount;
             transactions++; 
-            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
             transactionsList.add(transaction);
             this.saveToTransactionFile(transaction);
             return true;
@@ -157,7 +144,7 @@ public class ClsCurrentAccount extends ClsAccount{
             double amount = this.balance * super.rate;
             
             transactions++;
-            ClsTransaction transaction = new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "Out", amount, this, this, this.balance);
             transactionsList.add(transaction);
             endOfMonthSummary(src);
             this.saveToTransactionFile(transaction);

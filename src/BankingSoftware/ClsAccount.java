@@ -129,4 +129,12 @@ public abstract class ClsAccount {
         return (this.type+ ", "+this.sortCode +", "+ this.accountNo +", "+ this.balance +", "+ this.nameOfBank +", "+ this.rate +", "+ this.transactions /* +", "+ this.openingDate + this.lastReportedDate */);
     }
 
+    public Date makeDate(){
+        // Create today's date for transactions
+        Date date = new Date();
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        // Testing
+        //System.out.println(sqlDate);
+        return sqlDate;
+    }
 }

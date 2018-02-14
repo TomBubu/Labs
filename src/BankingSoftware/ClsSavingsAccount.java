@@ -32,10 +32,6 @@ public class ClsSavingsAccount extends ClsAccount{
         create(withdrawLimit);
     }
     
-    public void display(){
-        
-    }
-    
     public void create(double withdrawLimit){
         this.withdrawLimit = withdrawLimit;
     }
@@ -65,9 +61,38 @@ public class ClsSavingsAccount extends ClsAccount{
         if(amount > 0){
             balance += amount;
             transactions++;
+            
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, new ClsCurrentAccount(), this.balance);
+            if (transactionsList == null){
+                transactionsList = new ClsTransactionList();
+                transactionsList.add(transaction);
+                
+                depositSuccessful = true;
+            }
+            else {
+                transactionsList.add(transaction);
+                depositSuccessful =  true;
+            }
+            
+            this.saveToTransactionFile(transaction);
+            
         }
         return depositSuccessful;
     }
+    
+    
+    // CR.
+    private void saveToTransactionFile(ClsTransaction transaction){
+        transactionsList.removeLineFromFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], "EmptyLine", transaction);
+        //System.out.println("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt\n");
+        //System.out.println("Empty Line removed.\n");
+        transactionsList.saveToFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], transaction);
+        // Testing
+        //System.out.println("Output successful.\n");
+        System.gc();
+    }
+    
+    
  
     @Override
     public boolean withdraw(double amount){

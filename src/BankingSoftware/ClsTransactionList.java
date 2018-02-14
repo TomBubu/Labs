@@ -48,31 +48,48 @@ public class ClsTransactionList {
     
     public void saveToFile(String name, ClsTransaction transaction){
         BufferedWriter out = null;
+        String filename = "";
+        switch (transaction.getAccType()) {
+            case "Current Account":
+                filename = ("transactions_" + name + "_CA.txt");
+                break;
+            case "ISA Account":
+                filename = ("transactions_" + name + "_ISA.txt");
+                break;
+            case "Saving Account":
+                filename = ("transactions_" + name + "_SA.txt");
+                break;
+            default:
+                filename = null;
+        }
+        
         try {
-            out = new BufferedWriter (new FileWriter("transactions_" + name + ".txt", true));
-
-            //for (ClsTransaction transaction : transactions) {
-                //transaction.saveToFile(out);
-            //}
-            transaction.saveToFile(out);
-            
+            out = new BufferedWriter (new FileWriter(filename, true));
+            transaction.saveToFile(out); 
             out.newLine();
             out.close();
-        } catch (IOException ioe1) {
-            System.out.println("IO Problem: " + ioe1);
-            try {
-                if (out != null) {
-                    out.close();
-                }
-            } catch (IOException ioe2) {
-                System.out.println("IO Problem: " + ioe2);
-            }
-        }
+        } catch (IOException ioe1) { System.out.println("IO Problem: " + ioe1); }
     }
     
-    public void removeLineFromFile(String filename, String lineToRemove) {
+    public void removeLineFromFile(String name, String lineToRemove, ClsTransaction transaction) {
         BufferedReader br;
         PrintWriter pw = null;
+        String filename;
+        
+        switch (transaction.getAccType()) {
+            case "Current Account":
+                filename = ("transactions_" + name + "_CA.txt");
+                break;
+            case "ISA Account":
+                filename = ("transactions_" + name + "_ISA.txt");
+                break;
+            case "Saving Account":
+                filename = ("transactions_" + name + "_SA.txt");
+                break;
+            default:
+                filename = null;
+        }
+        
         try {
             File inFile = new File(filename);
             if (!inFile.isFile()) {

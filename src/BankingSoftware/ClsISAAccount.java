@@ -32,17 +32,6 @@ public class ClsISAAccount extends ClsAccount{
         create(maxDepositPerYear, depositedThisYear);
     }
     
-    public void display(/*int option, JLabel src*/){
-        /*
-        if(option==1){
-            src.setText("Not enough funds.");
-        }
-        else if(option==2){
-            
-        }
-        */
-    }  
-    
     public void create(double maxDepositPerYear, double depositedThisYear){
         this.maxDepositPerYear = maxDepositPerYear;
         this.depositedThisYear = depositedThisYear;
@@ -78,11 +67,35 @@ public class ClsISAAccount extends ClsAccount{
             this.depositedThisYear += amount;
             transactions++;
             depositSuccessful = true;
+            
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, this, new ClsCurrentAccount(), this.balance);
+            if (transactionsList == null){
+                transactionsList = new ClsTransactionList();
+                transactionsList.add(transaction);
+                
+                depositSuccessful = true;
+            }
+            else {
+                transactionsList.add(transaction);
+                depositSuccessful =  true;
+            }
+            
+            this.saveToTransactionFile(transaction);
         }
         else{
             depositSuccessful = false;
         }
         return depositSuccessful;
+    }
+    
+    private void saveToTransactionFile(ClsTransaction transaction){
+        transactionsList.removeLineFromFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], "EmptyLine", transaction);
+        //System.out.println("transactions_"+super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1]+".txt\n");
+        //System.out.println("Empty Line removed.\n");
+        transactionsList.saveToFile(super.accountHolder.getCustomerDetails()[0]+super.accountHolder.getCustomerDetails()[1], transaction);
+        // Testing
+        //System.out.println("Output successful.\n");
+        System.gc();
     }
     
     @Override

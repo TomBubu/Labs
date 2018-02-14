@@ -2173,21 +2173,14 @@ public class BankingGUIFrame extends javax.swing.JFrame {
         String DOB = jTransactionsDOBTextField.getText();
         String sortCode = jSortCodeTextField.getText();
         int accNo = Integer.parseInt(jTransactionsAccNumberTextField.getText());
-        
-        
-        
+           
         if(!(amount == 0 || firstName == "" || surname == "" || DOB == "" || accNo == 0 || sortCode == "") && theCustomer != null){
-            
             theCustomer.returnSpecificAcc(sortCode, accNo).deposit(amount);
-            //theCustomer.returnSpecificAcc(sortCode, accNo).saveToTransactionFile(); // Found at line 71 in ClsCurrentAccount
-            
-            
             // Testing:
             //System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);
             
             // Get Customer's account via Customer object and then via the account, get transaction list and use method display in the transaction list
             theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.display(jTransactionTextArea);
-            
         }
         else jStatusMessageLabel.setText("Please, fill out all fields and search for a customer in Clients tab first.");
     }//GEN-LAST:event_jDepositBtnActionPerformed

@@ -71,4 +71,8 @@ public class ClsTransaction {
             Logger.getLogger(ClsTransaction.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public String getAccType(){
+        return this.receiver.type;
+    }
 }
