@@ -106,7 +106,18 @@ public class ClsISAAccount extends ClsAccount{
         if(balance > 0){
             balance -= amount;
             transactions++;
-            withdrawSuccessful = true;
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, new ClsCurrentAccount(), this.balance);
+            
+            if (transactionsList == null){
+                transactionsList = new ClsTransactionList();
+                transactionsList.add(transaction);
+                withdrawSuccessful = true;
+            }
+            else {
+                transactionsList.add(transaction);
+                withdrawSuccessful =  true;
+            }
+            this.saveToTransactionFile(transaction);
         }
         else{
             withdrawSuccessful = false;

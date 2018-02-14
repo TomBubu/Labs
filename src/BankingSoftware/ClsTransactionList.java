@@ -155,7 +155,7 @@ public class ClsTransactionList {
             transactions.clear();
             
             //I need to increment i by 4 each time, because one client is made of 4 entries
-            for (int i = 0; i < words.size() - 19; i += 19) {
+            for (int i = 0; i < words.size() - 15; i += 15) {
 
                 
                 // Define format
@@ -169,22 +169,20 @@ public class ClsTransactionList {
                              
                 
                 ClsCurrentAccount sender = new ClsCurrentAccount(
-                        DetailsArray[i],
-                        DetailsArray[i+1], //sort code         2
-                        Integer.parseInt(DetailsArray[i + 2]), //accountNo         3
-                        Double.parseDouble(DetailsArray[i +3]), //balance           4
-                        DetailsArray[i + 4], //nameOfBank        5
-                        Double.parseDouble(DetailsArray[i + 5]), //rate              6
-                        Integer.parseInt(DetailsArray[i + 6]), //transactions      7 
+                        DetailsArray[i+4],
+                        DetailsArray[i+5], //sort code         2
+                        Integer.parseInt(DetailsArray[i + 6]), //accountNo         3
+                        Double.parseDouble(DetailsArray[i +7]), //balance           4
+                        DetailsArray[i + 8], //nameOfBank        5
+                        Double.parseDouble(DetailsArray[i + 9]), //rate              6
+                        Integer.parseInt(DetailsArray[i + 10]), //transactions      7 
                         aCustomer, //ClsCustomer accountHolder     8
-                        DetailsArray[i + 7], //conditions        9
-                        Double.parseDouble(DetailsArray[i + 8]), //availableBalance  10
-                        Double.parseDouble(DetailsArray[i + 9]), //overdraftLimit    11
-                        Double.parseDouble(DetailsArray[i + 10]) //fee
+                        DetailsArray[i + 11], //conditions        9
+                        Double.parseDouble(DetailsArray[i + 12]), //availableBalance  10
+                        Double.parseDouble(DetailsArray[i + 13]), //overdraftLimit    11
+                        Double.parseDouble(DetailsArray[i + 14]) //fee
                 );
-                                        
-           
-                
+                     
                 ClsTransaction newTransaction = new ClsTransaction(
                         sqlDate,                                    // date
                         DetailsArray[i+1],                          // type
@@ -198,5 +196,7 @@ public class ClsTransactionList {
             System.out.println("IO Problem: " + ioe1);
         }
     }
+    
+ 
 }
 

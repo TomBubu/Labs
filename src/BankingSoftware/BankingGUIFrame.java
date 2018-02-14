@@ -2188,7 +2188,12 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                 // display the transactionList
                 theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.display(jTransactionTextArea);
             }
-            else jStatusMessageLabel.setText("No transactions available.");
+            else {
+                jStatusMessageLabel.setText("No transactions available.");
+                theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList = new ClsTransactionList();
+            
+            }
+            
         }
         else jStatusMessageLabel.setText("Please, fill out all fields in the transaction first.");
     }//GEN-LAST:event_jGenerateStatementBtnActionPerformed

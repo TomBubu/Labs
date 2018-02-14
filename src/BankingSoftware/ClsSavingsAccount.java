@@ -7,6 +7,7 @@ package BankingSoftware;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextArea;
@@ -98,17 +99,33 @@ public class ClsSavingsAccount extends ClsAccount{
  
     @Override
     public boolean withdraw(double amount){
-        long days = transactionDate.getTime() - openingDate.getTime();
-        //testing
+        
+        transactionDate = new Date();
+        openingDate = new Date();
+        long days = (transactionDate.getTime() - openingDate.getTime()) / (1000 * 60 * 60 * 24);
+        //Date date = new Date();
+        //java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        // testing
         //System.out.println(days);
         
         // could create error
         if(rate > 0 && days<=90){
             rate = rate - 0.49;
         }
-        if(amount > 0 && days <= 90){
+        if(amount > 0 && days >= 90){
             balance = balance - amount - 10.00;
             transactions++;
+            ClsTransaction transaction = new ClsTransaction(super.makeDate(), "In", amount, new ClsCurrentAccount(), this.balance);
+            if (transactionsList == null){
+                transactionsList = new ClsTransactionList();
+                transactionsList.add(transaction);
+                
+                return true;
+            }
+            else {
+                transactionsList.add(transaction);
+                return true;
+            }
         }
         
         return false;

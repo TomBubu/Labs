@@ -33,7 +33,8 @@ public abstract class ClsAccount {
     
     public ClsAccount() {
         create(" ", " ", 0, 0.0d, " ", 1.20, 0, accountHolder);
-        transactionDate = new Date(01/01/1900);
+        transactionDate = new Date();//01/01/1900
+        openingDate = new Date();
     }
     
     public ClsAccount(String type, String sortCode, int accountNo, double balance, String nameOfBank, double rate, /*Date openingDate,*/int transactions, ClsCustomer accountHolder){

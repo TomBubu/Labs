@@ -58,11 +58,12 @@ public class ClsTransaction {
     }
     
     private String output(){
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return 
         (
                 // How am I supposed to save all attributes of ClsCurrentAccount for receiver when it is of Absract class into a file
                 // so I can create object receiver in it? :?
-                this.date + ", " + this.type + ", " + this.amount + ", " + this.balance + ", " 
+                sdf.format(this.date) + ", " + this.type + ", " + this.amount + ", " + this.balance + ", " 
                 //+ this.receiver.outputToFile() + ", " + receiver.unimportantMethodX().outputTransactions()
                 + this.sender.outputTransactions()
         );
