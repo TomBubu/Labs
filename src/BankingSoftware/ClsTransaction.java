@@ -16,29 +16,24 @@ import javax.swing.JTextArea;
 public class ClsTransaction {
     
     private Date date;
+    private String type;
     private double amount;
     //private String reference;
     private ClsAccount receiver;
     private ClsAccount sender;
     private double balance;
     
-    private ClsAccount account;
-    
     public ClsTransaction(){
-        this.date = new Date(01/01/1900);
-        this.amount = 0.0d;
-        //this.reference = " ";
-        this.receiver = new ClsCurrentAccount();
-        this.sender = new ClsCurrentAccount();
-        this.balance = 0.0d;
+        create(new Date(01/01/1900), " ", 0.0d, new ClsCurrentAccount(), new ClsCurrentAccount(), 0.0d );
     }
     
-    public ClsTransaction(Date date, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
-        create(date, amount,/* reference,*/ receiver, sender, balance);
+    public ClsTransaction(Date date, String type, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
+        create(date, type, amount,/* reference,*/ receiver, sender, balance);
     }
     
-    public void create(Date date, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
+    public void create(Date date, String type, double amount,/* String reference,*/ ClsAccount receiver, ClsAccount sender, double balance){
         this.date = date;
+        this.type = type;
         this.amount = amount;
         //this.reference = reference;
         this.receiver = receiver;
@@ -49,12 +44,12 @@ public class ClsTransaction {
     public void display(JTextArea src){
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         src.append(
-                sdf.format(this.date) + " | " 
-                        + this.amount + " | " 
+                        "\t \n" +
+                        sdf.format(this.date) + " | " + "Type: " + this.type + " | " + "Amount: " + this.amount + " | " + "Balance: " + this.balance + " | \n"
                         //+ this.reference + " | "
-                        + this.receiver + " | " 
-                        + this.sender + " | " 
-                        + this.balance
+                        // A client is receiver but they can have multiple accounts, so it is good to see which account it was received to.
+                        + "\t Receiver: \n" + this.receiver.outputDetails() + " \n " 
+                        + "\t Sender: \n" + this.sender.outputDetails() + " \n "
         );
     }
 }

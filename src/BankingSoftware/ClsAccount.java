@@ -24,7 +24,7 @@ public abstract class ClsAccount {
     protected Date openingDate;
     protected int transactions;
     protected ClsCurrentAccount coHolder;
-    //protected ClsTransactionList transactionsList;
+    protected ClsTransactionList transactionsList = null;
     
     private boolean joint;
     private Date lastReportedDate;
@@ -34,7 +34,6 @@ public abstract class ClsAccount {
     public ClsAccount() {
         create(" ", " ", 0, 0.0d, " ", 1.20, 0, accountHolder);
         transactionDate = new Date(01/01/1900);
-        //transactionsList = new ClsTransactionList();
     }
     
     public ClsAccount(String type, String sortCode, int accountNo, double balance, String nameOfBank, double rate, /*Date openingDate,*/int transactions, ClsCustomer accountHolder){

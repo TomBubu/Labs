@@ -73,7 +73,7 @@ public class ClsSavingsAccount extends ClsAccount{
     public boolean withdraw(double amount){
         long days = transactionDate.getTime() - openingDate.getTime();
         //testing
-        System.out.println(days);
+        //System.out.println(days);
         
         // could create error
         if(rate > 0 && days<=90){

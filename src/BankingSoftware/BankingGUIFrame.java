@@ -2178,10 +2178,11 @@ public class BankingGUIFrame extends javax.swing.JFrame {
             
             theCustomer.returnSpecificAcc(sortCode, accNo).deposit(amount);
             
-            System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);
-            // display the transaction on the transaction window
-            // ideally through a method in a transactions class probably or in the customer/account. Which one is better?
-           
+            // Testing:
+            //System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);
+            
+            // Get Customer's account via Customer object and then via the account, get transaction list and use method display in the transaction list
+            theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.display(jTransactionTextArea);
             
         }
         else jStatusMessageLabel.setText("Please, fill out all fields and search for a customer in Clients tab first.");
@@ -2197,10 +2198,8 @@ public class BankingGUIFrame extends javax.swing.JFrame {
 
         if(!(amount == 0 || firstName == "" || surname == "" || DOB == "" || accNo == 0 || sortCode == "")){
             theCustomer.returnSpecificAcc(sortCode, accNo).withdraw(amount);
-            System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);
-            // display the transaction on the transaction window
-            // same as abov
-            
+            //System.out.println(theCustomer.returnSpecificAcc(sortCode, accNo).balance);
+            theCustomer.returnSpecificAcc(sortCode, accNo).transactionsList.display(jTransactionTextArea);
         }
         else jStatusMessageLabel.setText("Please, fill out all fields.");
     }//GEN-LAST:event_jWithdrawBtnActionPerformed

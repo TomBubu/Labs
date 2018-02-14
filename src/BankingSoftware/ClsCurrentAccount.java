@@ -21,12 +21,11 @@ public class ClsCurrentAccount extends ClsAccount{
     private double availableBalance;
     private double overdraftLimit;
     private double fee;
-    private ClsTransactionList transactionsList;
-    
+       
     public ClsCurrentAccount(){
         //create();
         super();
-        transactionsList = new ClsTransactionList();
+        //transactionsList = new ClsTransactionList();
         create(" ", 0.00, 100.00, 25.00);
     }
        
@@ -47,8 +46,7 @@ public class ClsCurrentAccount extends ClsAccount{
         Date date = new Date();
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         // Testing
-        System.out.println(sqlDate);
-        
+        //System.out.println(sqlDate);
         return sqlDate;
     }
     
@@ -71,6 +69,7 @@ public class ClsCurrentAccount extends ClsAccount{
     public void depositMonthlyInterest(){
         // fix
         transactions++;
+        //double amount = monthlyInterest stuff
         //transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
     }
  
@@ -79,7 +78,7 @@ public class ClsCurrentAccount extends ClsAccount{
         // fix 
     }
  
-        @Override
+    @Override
     public boolean deposit(double amount) {
         boolean depositSuccessful = false;
         if (amount > 0) {
@@ -87,14 +86,20 @@ public class ClsCurrentAccount extends ClsAccount{
             this.balance = this.balance + amount;
             transactions++;
 
-            ClsTransaction transaction = new ClsTransaction(makeDate(), amount, this, this, this.balance);
+            ClsTransaction transaction = new ClsTransaction(makeDate(), "In", amount, this, this, this.balance);
 
             //it  "works" with this but not without it! Why?
-            //  creates new list every time
+            // creates new list every time
             // transactionsList = new ClsTransactionList();
-            transactionsList.add(transaction);
+            
+            if (transactionsList == null){
+                transactionsList = new ClsTransactionList();
+            }
+            else {
+                transactionsList.add(transaction);
+                depositSuccessful = true;
+            }
 
-            depositSuccessful = true;
         } else {
             depositSuccessful = false;
         }
@@ -106,18 +111,23 @@ public class ClsCurrentAccount extends ClsAccount{
         boolean withdrawSuccessful = false;
         // Gives error: abstract method withdraw(double) in ClsAccount cannot be accessed directly 
         //super.withdraw(value);
-        if((this.balance - amount)< this.overdraftLimit) {
+        
+        // balance = 0  
+        // amount = 50 
+        // < - 100
+        // makes stacoverflow error
+        if((this.balance - amount) < ((this.overdraftLimit)*(-1)) ) {
             withdraw(this.fee);
             //endMonthUtil();
             //super.transactions.addTransaction;
             transactions++;
-            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
+            transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
             withdrawSuccessful = true;
         }
         else{
             this.balance = this.balance - amount;
             transactions++; 
-            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
+            transactionsList.add(new ClsTransaction(makeDate(), "Out", amount, this, this, this.balance));
             withdrawSuccessful = true;
         }
         return withdrawSuccessful;
@@ -127,13 +137,15 @@ public class ClsCurrentAccount extends ClsAccount{
     public void endOfMonthUtil(JTextArea src){
         long days = transactionDate.getTime() - openingDate.getTime();
         if(days >= 31){
-            balance *= rate;
+            this.balance = this.balance * super.rate;
+            // 5 = 5 * 1.20  
+            // balance will be 6.
             
             // possible error
-            double amount = this.balance - (balance*=rate);
+            double amount = this.balance * super.rate;
             
             transactions++;
-            transactionsList.add(new ClsTransaction(makeDate(), amount, this, this, this.balance));
+            transactionsList.add(new ClsTransaction(makeDate(), "In", amount, this, this, this.balance));
             endOfMonthSummary(src);
         }
     }

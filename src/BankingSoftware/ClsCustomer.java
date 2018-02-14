@@ -28,7 +28,6 @@ public class ClsCustomer {
     //private ClsAccount CustomerAccount; // used previously in lab 6 or 7
     // ArrayList of object instances of class Account
     private ArrayList<ClsAccount> ownedAccounts;
-    private ClsTransactionList transactions;
         
     private String FirstName;
     private String Surname;
@@ -321,8 +320,8 @@ public class ClsCustomer {
                         Double.parseDouble(DetailsArray[i + 7]) //withdrawLimit     9
                 );
                 ownedAccounts.add(newAccount);
-                //Testing
-                System.out.println(ownedAccounts.size());
+                // Testing
+                //System.out.println(ownedAccounts.size());
             }
         } catch (IOException ioe1) {
             System.out.println("IO Problem: " + ioe1);
