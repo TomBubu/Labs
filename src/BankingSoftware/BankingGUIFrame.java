@@ -1721,7 +1721,7 @@ public class BankingGUIFrame extends javax.swing.JFrame {
                 } 
                 importClients();
                 jStatusAnimationLabel.setText(jNameTextField.getText() + " " + jRoleComboBox.getSelectedItem().toString() + " is logged in.");
-            } else jStatusMessageLabel.setText("Cannot login, the user cannot be found, please register.");
+            } else jStatusMessageLabel.setText("Incorrect information entered, or the user is not existent.");
         } else jStatusMessageLabel.setText("Please input valid username, password and role.");    
     }//GEN-LAST:event_jLoginButtonActionPerformed
     //done
